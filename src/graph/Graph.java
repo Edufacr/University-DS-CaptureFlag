@@ -71,7 +71,6 @@ public class Graph<T> {
 				path.add(invPath.get(invPathIndex));
 			}
 			return path;
-			
 		}
 		return null;
 	}

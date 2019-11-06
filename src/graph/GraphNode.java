@@ -6,6 +6,7 @@ public class GraphNode<T> {
 	private T contents;
 	private boolean visited;
 	private ArrayList<GraphNode<T>> adjacentNodes;
+	private ArrayList<Integer> weights;
 	private GraphNode<T> last;
 	
 	public GraphNode(T pContents) {
@@ -20,6 +21,10 @@ public class GraphNode<T> {
 
 	public ArrayList<GraphNode<T>> getAdjacentNodes() {
 		return this.adjacentNodes;
+	}
+	
+	public ArrayList<Integer> getWeights(){
+		return this.weights;
 	}
 	
 	public boolean isVisited() {
@@ -51,9 +56,20 @@ public class GraphNode<T> {
 		return null;
 	}
 	
+	public int getWeight(T pValue) {
+		GraphNode<T> node = this.getAdjacent(pValue);
+		if (node != null) {
+			int index = this.adjacentNodes.indexOf(node);
+			return this.weights.get(index);
+		}
+		return 0;
+	}
+	
 	public void addEdge(GraphNode<T> pNode) {
 		if (!this.adjacentNodes.contains(pNode)) {
 			this.adjacentNodes.add(pNode);
 		}
 	}
+	
+	
 }
