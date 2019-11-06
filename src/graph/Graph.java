@@ -32,13 +32,21 @@ public class Graph<T> {
 		this.directory.clear();
 	}
 	
-	public void addEdge(T pValue1, T pValue2) {
+	public void addEdge(T pValue1, T pValue2, int pWeight) {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
 			GraphNode<T> node1 = directory.get(pValue1);
 			GraphNode<T> node2 = directory.get(pValue2);
-			node1.addEdge(node2);
-			node2.addEdge(node1);
+			node1.addEdge(node2, pWeight);
+			node2.addEdge(node1, pWeight);
 		}
+	}
+	
+	public int getWeight(T pValue1, T pValue2) {
+		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
+			GraphNode<T> node1 = directory.get(pValue1);
+			return node1.getWeight(pValue2);
+		}
+		return 0;
 	}
 	
 	public ArrayList<T> getPath(T pValue1, T pValue2){
@@ -110,14 +118,16 @@ public class Graph<T> {
 		g.addNode("D");
 		g.addNode("E");
 		
-		g.addEdge("A", "C");
-		g.addEdge("A", "D");
-		g.addEdge("B", "C");
-		g.addEdge("B", "E");
+		g.addEdge("A", "C", 5);
+		g.addEdge("A", "D", 7);
+		g.addEdge("B", "C", 1);
+		g.addEdge("B", "E", 3);
 		
 		ArrayList<String> path = g.getPath("A", "E");
 	
-		System.out.println(path);
+		System.out.println(path + "\n");
 
+		System.out.println(g.getWeight("A", "D"));
+		
 	}
 }

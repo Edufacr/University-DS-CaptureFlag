@@ -12,6 +12,7 @@ public class GraphNode<T> {
 	public GraphNode(T pContents) {
 		this.contents = pContents;
 		this.adjacentNodes = new ArrayList<GraphNode<T>>();
+		this.weights = new ArrayList<Integer>();
 		this.last = null;
 	}
 
@@ -65,9 +66,10 @@ public class GraphNode<T> {
 		return 0;
 	}
 	
-	public void addEdge(GraphNode<T> pNode) {
+	public void addEdge(GraphNode<T> pNode, int pWeight) {
 		if (!this.adjacentNodes.contains(pNode)) {
 			this.adjacentNodes.add(pNode);
+			this.weights.add(pWeight);
 		}
 	}
 	
