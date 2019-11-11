@@ -90,6 +90,7 @@ public class SocketClient extends Observable implements Runnable {
             while (active)
             {
                 String read = input.readUTF();
+                System.out.println("SocketClient: "+read);
                 Message msg = new Message(read);
                 this.setChanged();
                 this.notifyObservers(msg);
@@ -100,9 +101,5 @@ public class SocketClient extends Observable implements Runnable {
         {
             this.notifyObservers(this);
         }
-    }
-
-    public static void main(String[] args) {
-        SocketClient client = new SocketClient("127.0.0.1");
     }
 }

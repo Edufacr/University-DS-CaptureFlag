@@ -4,6 +4,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Observer;
 import client.SocketClient;
+import common.Message;
 
 public class Server implements Runnable {
     private boolean active;
@@ -47,9 +48,5 @@ public class Server implements Runnable {
             }
         }
         System.out.println("Closing server");
-    }
-
-    public static void main(String[] args) {
-        //Server server = new Server();
     }
 }
