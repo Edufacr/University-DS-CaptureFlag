@@ -6,7 +6,7 @@ import common.Message;
 
 public class ClientMain {
     public static void main(String[] args) {
-        SocketClient client = new SocketClient("127.0.0.1");
+        SocketClient client = new SocketClient("192.168.0.14");
         ClientManager manager = new ClientManager(client);
         manager.sendMessage(2);
         //client.sendMsg(new Message(1));
