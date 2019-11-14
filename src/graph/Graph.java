@@ -83,10 +83,6 @@ public class Graph<T> {
 		return null;
 	}
 	
-	public T getHome() {
-		return this.nodes.get(0).getContents();
-	}
-	
 	private ArrayList<T> generatePath(ArrayList<T> pArray, GraphNode<T> pNode){
 		if (pNode == null) {
 			return pArray;
@@ -98,8 +94,8 @@ public class Graph<T> {
 	
 	public void print() {
 		for (GraphNode<T> node : this.nodes) {
-			System.out.println("Nodo: " + node.getContents());
-			System.out.print("Adyacentes: ");
+			System.out.println("Node: " + node.getContents());
+			System.out.print("Adjacent: ");
 			for (GraphNode<T> adjNode : node.getAdjacentNodes()) {
 				System.out.print("" + adjNode.getContents() + " ");
 			}
@@ -132,7 +128,8 @@ public class Graph<T> {
 	
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
-		System.out.println(Integer.MAX_VALUE);
+		Dijkstra d = new Dijkstra();
+		
 		g.addNode("A");
 		g.addNode("B");
 		g.addNode("C");
@@ -144,11 +141,9 @@ public class Graph<T> {
 		g.addEdge("B", "C", 1);
 		g.addEdge("B", "E", 3);
 		
-		ArrayList<String> path = g.getPath("A", "E");
-	
-		System.out.println(path + "\n");
-
-		System.out.println(g.getWeight("A", "D"));
+		System.out.println(d.calculateDijkstra(g, "A", "B"));
+		
+		
 		
 	}
 }

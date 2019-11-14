@@ -14,6 +14,7 @@ public class GraphNode<T> {
 		this.adjacentNodes = new ArrayList<GraphNode<T>>();
 		this.weights = new ArrayList<Integer>();
 		this.last = null;
+		this.visited = false;
 	}
 
 	public T getContents() {
@@ -59,11 +60,21 @@ public class GraphNode<T> {
 	
 	public int getWeight(T pValue) {
 		GraphNode<T> node = this.getAdjacent(pValue);
-		if (node != null) {
-			int index = this.adjacentNodes.indexOf(node);
-			return this.weights.get(index);
+		if (node == null) {
+			return 0;
 		}
-		return 0;
+		int index = this.adjacentNodes.indexOf(node);
+		return this.weights.get(index);
+	}
+	
+	public int getWeight(GraphNode<T> pNode) {
+		if (this.adjacentNodes.contains(pNode)) {
+			int index = this.adjacentNodes.indexOf(pNode);
+			return this.weights.get(index);
+		} else if(this.equals(pNode)) {
+			return 0;
+		}
+		return Integer.MAX_VALUE;
 	}
 	
 	public void addEdge(GraphNode<T> pNode, int pWeight) {
@@ -72,6 +83,4 @@ public class GraphNode<T> {
 			this.weights.add(pWeight);
 		}
 	}
-	
-	
 }
