@@ -96,7 +96,6 @@ public class Graph<T> {
 		}
 	}
 	
-	
 	public void print() {
 		for (GraphNode<T> node : this.nodes) {
 			System.out.println("Nodo: " + node.getContents());
@@ -109,6 +108,19 @@ public class Graph<T> {
 		}
 	}
 	
+	public boolean contains(T pValue) {
+		if (this.directory.containsKey(pValue)) {
+			return true;
+		}
+		return false;
+	}
+	
+	GraphNode<T> getNode(T pValue){
+		if (this.directory.containsKey(pValue)) {
+			return this.directory.get(pValue);
+		}
+		return null;
+	} 
 	
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
