@@ -37,13 +37,6 @@ public class mainWindow implements IConstants{
 				current = cells.get(key);
 				current.setSize(30, 20);
 				
-				
-				if((j%2==0) && (i%2!=0)) {
-					current.setBackground(Color.blue);
-				} else if ((j%2==0) && (i%2==0)){
-					current.setBackground(Color.green);
-				}
-				
 				if (i%2==0) {
 					if (j%2==0) {
 						current.setBackground(Color.blue);
