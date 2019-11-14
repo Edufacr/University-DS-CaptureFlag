@@ -120,10 +120,19 @@ public class Graph<T> {
 			return this.directory.get(pValue);
 		}
 		return null;
-	} 
+	}
+	
+	ArrayList<GraphNode<T>> getNodes(){
+		return this.nodes;
+	}
+	
+	int getSize() {
+		return this.nodes.size();
+	}
 	
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
+		System.out.println(Integer.MAX_VALUE);
 		g.addNode("A");
 		g.addNode("B");
 		g.addNode("C");
