@@ -20,6 +20,15 @@ public class Graph<T> {
 			directory.put(pValue, node);
 		}
 	}
+	public void addNode(GraphNode<T> pNode){
+		if(directory.containsKey(pNode.getContents())){
+			return;
+		}
+		else{
+			nodes.add(pNode);
+			directory.put(pNode.getContents(),pNode);
+		}
+	}
 	
 	public void clearVisits() {
 		for (GraphNode<T> node : this.nodes) {
@@ -125,7 +134,11 @@ public class Graph<T> {
 	int getSize() {
 		return this.nodes.size();
 	}
-	
+
+	boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
+		return pNode1.getAdjacentNodes().contains(pNode2);
+	}
+
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
 		Dijkstra d = new Dijkstra();
