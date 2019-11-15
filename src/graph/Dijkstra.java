@@ -8,14 +8,12 @@ public class Dijkstra <T>{
 	private Hashtable<GraphNode<T>, Integer> set;
 	private ArrayList<GraphNode<T>> visited;
 	private ArrayList<GraphNode<T>> nodes;
-	private GraphNode<T> current;
 	
 	public Dijkstra() {
 		this.path = new ArrayList<GraphNode<T>>();
 		this.set = new Hashtable<GraphNode<T>, Integer>();
 		this.visited = new ArrayList<GraphNode<T>>();
 		this.nodes = null;
-		this.current = null;
 	}
 	
 	public ArrayList<GraphNode<T>> calculateDijkstra(Graph<T> pGraph, T pValue1, T pValue2){
@@ -48,8 +46,8 @@ public class Dijkstra <T>{
 			}
 			
 			this.dijkstraStep(this.getNextNode(start));
-			//this.buildPath(end);
-			
+			this.path.add(start);
+			this.buildPath(end);
 		}
 		
 		return this.path;
@@ -62,7 +60,7 @@ public class Dijkstra <T>{
 		}
 		
 		int currentMin = Integer.MAX_VALUE;
-		GraphNode<T> currentMinNode = null;
+		GraphNode<T> currentMinNode = pNode;
 		for(GraphNode<T> adjacentNode : pNode.getAdjacentNodes()) {
 			if(this.visited.contains(adjacentNode)) {
 				continue;
@@ -77,10 +75,27 @@ public class Dijkstra <T>{
 	
 	private void dijkstraStep(GraphNode<T> pNode) {
 		
-		for (GraphNode<T> adjacentNode : pNode.getAdjacentNodes()) {
-			this.set.put(adjacentNode, pNode.getWeight(adjacentNode));
-			adjacentNode.setLast(pNode);
+		if (this.nodes.size() == this.visited.size()) {
+			return;
 		}
+		
+		
+		int currentWeight;
+		int newWeight;
+		for (GraphNode<T> adjacentNode : pNode.getAdjacentNodes()) {	
+			if ((pNode.getWeight(adjacentNode) == Integer.MAX_VALUE) || (this.set.get(pNode) == Integer.MAX_VALUE)) {
+				continue;
+			}
+			currentWeight = this.set.get(adjacentNode);
+			newWeight = this.set.get(pNode) + pNode.getWeight(adjacentNode);
+			if (newWeight < currentWeight) {
+				this.set.put(adjacentNode, newWeight);
+				adjacentNode.setLast(pNode);
+			}
+		}
+		
+		this.visited.add(pNode);
+		this.dijkstraStep(this.getNextNode(pNode));
 	}
 	
 	private void buildPath(GraphNode<T> pNode) {

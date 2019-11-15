@@ -89,4 +89,9 @@ public class GraphNode<T> {
 		GraphNode<T> node = (GraphNode<T>)obj;
 		return getContents().equals(node.getContents());
 	}
+	
+	@Override
+	public String toString() {
+		return this.contents.toString();
+	}
 }

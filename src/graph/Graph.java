@@ -148,15 +148,16 @@ public class Graph<T> {
 		g.addNode("C");
 		g.addNode("D");
 		g.addNode("E");
+		g.addNode("F");
 		
 		g.addEdge("A", "C", 5);
 		g.addEdge("A", "D", 7);
+		g.addEdge("C", "E", 9);
 		g.addEdge("B", "C", 1);
 		g.addEdge("B", "E", 3);
+		g.addEdge("E", "A", 14);
+		g.addEdge("E", "F", 8);
 		
-		System.out.println(d.calculateDijkstra(g, "A", "B"));
-		
-		
-		
+		System.out.println(d.calculateDijkstra(g, "D", "F"));
 	}
 }
