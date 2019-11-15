@@ -171,6 +171,6 @@ public class Graph<T> {
 		
 		System.out.println(g.getEdges());
 		System.out.println(d.calculateDijkstra(g, "D", "F"));
-		k.getPath(g, null, null);
+		System.out.println(k.getPath(g, "C", "E"));
 	}
 }
