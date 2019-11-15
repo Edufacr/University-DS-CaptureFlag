@@ -158,7 +158,6 @@ public class Graph<T> {
 		g.addEdge("E", "A", 14);
 		g.addEdge("E", "F", 8);
 		
-		
 		System.out.println(d.calculateDijkstra(g, "D", "F"));
 	}
 }
