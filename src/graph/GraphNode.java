@@ -83,4 +83,9 @@ public class GraphNode<T> {
 			this.weights.add(pWeight);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return this.contents.toString();
+	}
 }
