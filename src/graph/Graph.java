@@ -21,10 +21,7 @@ public class Graph<T> {
 		}
 	}
 	public void addNode(GraphNode<T> pNode){
-		if(directory.containsKey(pNode.getContents())){
-			return;
-		}
-		else{
+		if (!directory.containsKey(pNode.getContents())) {
 			nodes.add(pNode);
 			directory.put(pNode.getContents(),pNode);
 		}
