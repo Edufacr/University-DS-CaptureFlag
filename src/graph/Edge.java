@@ -31,5 +31,9 @@ public class Edge<T> implements Comparable <Edge<T>>{
 		return 0;
 	}
 	
+	@Override
+	public String toString() {
+		return "" + this.nodes.get(0) + "-" + this.nodes.get(1) + ": " + this.weight;
+	}
 	
 }
