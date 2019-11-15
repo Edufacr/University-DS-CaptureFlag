@@ -3,13 +3,16 @@ package graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ArrayDeque;
+import java.util.Collections;
 
 public class Graph<T> {
 	private ArrayList<GraphNode<T>> nodes;
+	private ArrayList<Edge<T>> edges;
 	private HashMap<T, GraphNode<T>> directory;
 	
 	public Graph() {
 		this.nodes = new ArrayList<GraphNode<T>>();
+		this.edges = new ArrayList<Edge<T>>();
 		this.directory = new HashMap<T, GraphNode<T>>();
 	}
 	
@@ -44,6 +47,8 @@ public class Graph<T> {
 			GraphNode<T> node2 = directory.get(pValue2);
 			node1.addEdge(node2, pWeight);
 			node2.addEdge(node1, pWeight);
+			this.edges.add(node1.getEdge(node2));
+			this.edges.add(node2.getEdge(node1));
 		}
 	}
 	
@@ -117,15 +122,20 @@ public class Graph<T> {
 		return false;
 	}
 	
-	GraphNode<T> getNode(T pValue){
+	public GraphNode<T> getNode(T pValue){
 		if (this.directory.containsKey(pValue)) {
 			return this.directory.get(pValue);
 		}
 		return null;
 	}
 	
-	ArrayList<GraphNode<T>> getNodes(){
+	public ArrayList<GraphNode<T>> getNodes(){
 		return this.nodes;
+	}
+	
+	public ArrayList<Edge<T>> getEdges(){
+		Collections.sort(this.edges);
+		return this.edges;
 	}
 	
 	int getSize() {
@@ -139,6 +149,7 @@ public class Graph<T> {
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
 		Dijkstra<String> d = new Dijkstra<String>();
+		Kruskal<String> k = new Kruskal<String>();
 		
 		g.addNode("A");
 		g.addNode("B");
@@ -155,6 +166,8 @@ public class Graph<T> {
 		g.addEdge("E", "A", 14);
 		g.addEdge("E", "F", 8);
 		
+		System.out.println(g.getEdges());
 		System.out.println(d.calculateDijkstra(g, "D", "F"));
+		System.out.println(k.getPath(g, "C", "E"));
 	}
 }
