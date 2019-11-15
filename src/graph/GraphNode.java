@@ -85,9 +85,9 @@ public class GraphNode<T> {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		GraphNode<T> node = (GraphNode<T>)obj;
-		return getContents().equals(node.getContents());
+	public boolean equals(Object pObject) {
+		GraphNode<T> node = (GraphNode<T>) pObject;
+		return this.getContents().equals(node.getContents());
 	}
 	
 	@Override
