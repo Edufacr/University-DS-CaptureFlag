@@ -83,4 +83,10 @@ public class GraphNode<T> {
 			this.weights.add(pWeight);
 		}
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		GraphNode<T> node = (GraphNode<T>)obj;
+		return getContents().equals(node.getContents());
+	}
 }
