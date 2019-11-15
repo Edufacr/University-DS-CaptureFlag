@@ -3,6 +3,7 @@ package graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ArrayDeque;
+import java.util.Collections;
 
 public class Graph<T> {
 	private ArrayList<GraphNode<T>> nodes;
@@ -136,6 +137,7 @@ public class Graph<T> {
 	}
 	
 	public ArrayList<Edge<T>> getEdges(){
+		Collections.sort(this.edges);
 		return this.edges;
 	}
 	
@@ -150,6 +152,7 @@ public class Graph<T> {
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
 		Dijkstra<String> d = new Dijkstra<String>();
+		Kruskal<String> k = new Kruskal<String>();
 		
 		g.addNode("A");
 		g.addNode("B");
@@ -166,7 +169,8 @@ public class Graph<T> {
 		g.addEdge("E", "A", 14);
 		g.addEdge("E", "F", 8);
 		
-		
+		System.out.println(g.getEdges());
 		System.out.println(d.calculateDijkstra(g, "D", "F"));
+		k.getPath(g, null, null);
 	}
 }

@@ -59,7 +59,7 @@ public class GraphNode<T> {
 	}
 	
 	public Edge<T> getEdge(GraphNode<T> pNode){
-		for (Edge edge : this.edges) {
+		for (Edge<T> edge : this.edges) {
 			if (edge.getNodes().get(1).equals(pNode)) {
 				return edge;
 			}
@@ -72,13 +72,13 @@ public class GraphNode<T> {
 		if (node == null) {
 			return Integer.MAX_VALUE;
 		}
-		Edge edge = this.getEdge(node);
+		Edge<T> edge = this.getEdge(node);
 		return edge.getWeight();
 	}
 	
 	public int getWeight(GraphNode<T> pNode) {
 		if (this.adjacentNodes.contains(pNode)) {
-			Edge edge = this.getEdge(pNode);
+			Edge<T> edge = this.getEdge(pNode);
 			return edge.getWeight();
 		} else if(this.equals(pNode)) {
 			return 0;

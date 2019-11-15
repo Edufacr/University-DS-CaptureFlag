@@ -32,6 +32,18 @@ public class Edge<T> implements Comparable <Edge<T>>{
 	}
 	
 	@Override
+	public boolean equals(Object pObject) {
+		if (this == pObject) {
+			return true;
+		} 
+		Edge<T> otherEdge = (Edge<T>) pObject;
+		if ((this.nodes.get(0)==otherEdge.getNodes().get(1))&&(this.nodes.get(1)==otherEdge.getNodes().get(0))) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	public String toString() {
 		return "" + this.nodes.get(0) + "-" + this.nodes.get(1) + ": " + this.weight;
 	}
