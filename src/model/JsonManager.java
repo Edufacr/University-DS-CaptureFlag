@@ -24,7 +24,10 @@ public class JsonManager implements IConstants{
 			JSONObject obstacle;
 			for (int arrayIterator = 0; arrayIterator < jsonCoordinates.length(); arrayIterator++) {
 				obstacle = jsonCoordinates.getJSONObject(arrayIterator);
-				int[] obstacleCoordinates = {obstacle.getInt(FIRST_X), obstacle.getInt(SECOND_X), obstacle.getInt(FIRST_Y), obstacle.getInt(SECOND_Y)};
+				int[] obstacleCoordinates = {
+						Integer.parseInt(obstacle.getString(FIRST_X)), Integer.parseInt(obstacle.getString(FIRST_Y)), 
+						Integer.parseInt(obstacle.getString(SECOND_X)), Integer.parseInt(obstacle.getString(SECOND_Y))
+						};
 				coordinates.add(obstacleCoordinates);
 			}
 			
@@ -62,6 +65,7 @@ public class JsonManager implements IConstants{
 	}
 	
 	public static void main(String[] args) {
+		
 		JsonManager jm = JsonManager.getInstance();
 		for( int[] coordinates : jm.getCoordinates()) {
 			for (int i = 0; i < coordinates.length; i++) {
