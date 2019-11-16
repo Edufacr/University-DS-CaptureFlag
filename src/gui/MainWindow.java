@@ -49,5 +49,6 @@ public class MainWindow extends JFrame implements IConstants{
 	
 	public static void main(String[] args) {
 		MainWindow window = new MainWindow();
+		System.out.println("A");
 	}
 }
