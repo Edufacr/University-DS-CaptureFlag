@@ -5,16 +5,18 @@ import java.util.Stack;
 
 public class Kruskal <T>{
 	private ArrayList<GraphNode<T>> path;
+	private ArrayList<GraphNode<T>> invertedPath;
 	private ArrayList<GraphNode<T>> nodes;
 	private ArrayList<Edge<T>> edges;
-	private ArrayList<Edge<T>> mst;
+	private Graph<T> mst;
 	private Stack<GraphNode<T>> stack;
 	
 	public Kruskal() {
 		this.path = new ArrayList<GraphNode<T>>();
+		this.invertedPath = new ArrayList<GraphNode<T>>();
 		this.nodes = null;
 		this.edges = null;
-		this.mst = new ArrayList<Edge<T>>();
+		this.mst = new Graph<T>();
 		this.stack = new Stack<GraphNode<T>>();
 	}
 	
@@ -26,38 +28,34 @@ public class Kruskal <T>{
 		this.calculateMST(pGraph);
 		
 		// Gets nodes from parameter values
-		GraphNode<T> start = pGraph.getNode(pValue1);
-		GraphNode<T> end = pGraph.getNode(pValue2);
+		GraphNode<T> start = this.mst.getNode(pValue1);
+		GraphNode<T> end = this.mst.getNode(pValue2);
 		
 		// Prepares structures for generation of path from MST
 		pGraph.clearVisits();
+		this.invertedPath.clear();
+		this.path.clear();
 		this.stack.clear();
 		this.stack.push(start);
 		
-		while (true) {
-			if (this.stack.isEmpty()) {
-				break;
-			}
+		while(!this.stack.isEmpty()) {
 			GraphNode<T> current = this.stack.pop();
 			current.visit();
-			
-			for (GraphNode<T> adjacentNode : current.getAdjacentNodes()) {
-				if (adjacentNode.isVisited()) {
-					continue;
-				} else if (!this.connected(current, adjacentNode)) {
-					adjacentNode.visit();
-					adjacentNode.setLast(current);
-					this.stack.push(adjacentNode);
+			for (GraphNode<T> adjNode : current.getAdjacentNodes()) {
+				if (!adjNode.isVisited()) {
+					adjNode.visit();
+					adjNode.setLast(current);
+					this.stack.push(adjNode);
 				}
-				
-				if (adjacentNode.equals(end)) {
+				if (adjNode.equals(end)) {
 					this.stack.clear();
 					break;
 				}
 			}
-			
-			this.path = this.generatePath(this.path, end);
-			
+		}
+		this.invertedPath = generatePath(this.invertedPath, end);
+		for (int invPathIndex = this.invertedPath.size() - 1; invPathIndex >= 0; invPathIndex--) {
+			this.path.add(this.invertedPath.get(invPathIndex));
 		}
 		
 		
@@ -67,16 +65,26 @@ public class Kruskal <T>{
 	private void calculateMST(Graph<T> pGraph) {
 		Edge<T> edge;
 		ArrayList<GraphNode<T>> edgeNodes;
+		Edge<T> newEdge;
+		GraphNode<T> newNode1;
+		GraphNode<T> newNode2;
+		
+		for (GraphNode<T> node : this.nodes) {
+			this.mst.addNode(node.copy());
+		}
+		
 		for (int edgeIndex = 0; edgeIndex < this.edges.size(); edgeIndex++) {
 			edge = this.edges.get(edgeIndex);
 			edgeNodes = edge.getNodes();
 			if (edgeNodes.get(0).isVisited() && edgeNodes.get(1).isVisited()) {
 				continue;
 			}
+			
 			edgeNodes.get(0).visit();
 			edgeNodes.get(1).visit();
-			this.mst.add(edge);
-			this.mst.add(this.edges.get(edgeIndex+1));
+			newNode1 = this.mst.getNode(edgeNodes.get(0).getContents());
+			newNode2 = this.mst.getNode(edgeNodes.get(1).getContents());
+			this.mst.addEdge(newNode1, newNode2, edge.getWeight());
 			
 			if (this.visitMissing()) {
 				continue;
@@ -94,14 +102,6 @@ public class Kruskal <T>{
 			visitStatus = true;
 		}
 		return visitStatus;
-	}
-	
-	private boolean connected(GraphNode<T> pNode, GraphNode<T> pOtherNode) {
-		Edge<T> graphEdge = pNode.getEdge(pOtherNode);
-		if (this.mst.contains(graphEdge)) {
-			return true;
-		}
-		return false;
 	}
 	
 	private ArrayList<GraphNode<T>> generatePath(ArrayList<GraphNode<T>> pArray, GraphNode<T> pNode){

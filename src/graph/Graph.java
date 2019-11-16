@@ -52,6 +52,15 @@ public class Graph<T> {
 		}
 	}
 	
+	public void addEdge(GraphNode<T> pNode1, GraphNode<T> pNode2, int pWeight) {
+		if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
+			pNode1.addEdge(pNode2, pWeight);
+			pNode2.addEdge(pNode1, pWeight);
+			this.edges.add(pNode1.getEdge(pNode2));
+			this.edges.add(pNode2.getEdge(pNode1));
+		}
+	}
+	
 	public int getWeight(T pValue1, T pValue2) {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
 			GraphNode<T> node1 = directory.get(pValue1);
@@ -157,6 +166,7 @@ public class Graph<T> {
 		g.addNode("D");
 		g.addNode("E");
 		g.addNode("F");
+		g.addNode("F");
 		
 		g.addEdge("A", "C", 5);
 		g.addEdge("A", "D", 7);
@@ -166,8 +176,8 @@ public class Graph<T> {
 		g.addEdge("E", "A", 14);
 		g.addEdge("E", "F", 8);
 		
-		System.out.println(g.getEdges());
-		System.out.println(d.calculateDijkstra(g, "D", "F"));
-		System.out.println(k.getPath(g, "C", "E"));
+		System.out.println("Graph edges: " + g.getEdges() + "\n");
+		System.out.println("Dijkstra path: " + d.calculateDijkstra(g, "D", "F") + "\n");
+		System.out.println("Kruskal path: " + k.getPath(g, "D", "F"));
 	}
 }

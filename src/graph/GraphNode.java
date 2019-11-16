@@ -92,6 +92,10 @@ public class GraphNode<T> {
 			this.edges.add(new Edge<T>(this, pNode, pWeight));
 		}
 	}
+	
+	public GraphNode<T> copy(){
+		return new GraphNode<T>(this.contents);
+	}
 
 	@Override
 	public boolean equals(Object pObject) {

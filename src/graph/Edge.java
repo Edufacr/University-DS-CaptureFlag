@@ -20,6 +20,7 @@ public class Edge<T> implements Comparable <Edge<T>>{
 	public int getWeight() {
 		return this.weight;
 	}
+	
 
 	@Override
 	public int compareTo(Edge<T> pOtherEdge) {
