@@ -7,12 +7,12 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import common.IConstants;
 
-public class mainWindow implements IConstants{
+public class MainWindow implements IConstants{
 	
 	private JFrame frame;
 	private JPanel[][] cells;
 	
-	public mainWindow() {
+	public MainWindow() {
 		this.cells = new JPanel[GRID_WIDTH][GRID_HEIGHT];
 		
 		this.frame =  new JFrame(WINDOW_NAME);
@@ -42,6 +42,6 @@ public class mainWindow implements IConstants{
 	}
 	
 	public static void main(String[] args) {
-		mainWindow window = new mainWindow();
+		MainWindow window = new MainWindow();
 	}
 }
