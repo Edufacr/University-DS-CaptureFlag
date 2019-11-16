@@ -1,4 +1,4 @@
-package graph;
+package model.graph;
 
 import java.util.ArrayList;
 
@@ -26,13 +26,13 @@ public class Warshall<T> {
                 }
             }
         }
-        copy.print();
     }
     private void initValues(Graph<T> pGraph){
         original = pGraph;
         copy = duplicateGraph(pGraph);
     }
-    private ArrayList<GraphNode<T>> getPath(T startContent, T endContent){
+    
+    public ArrayList<GraphNode<T>> getPath(T startContent, T endContent){
         ArrayList<GraphNode<T>> list = new ArrayList<GraphNode<T>>();
         GraphNode<T> startNode = copy.getNode(startContent);
         for (GraphNode<T> node:startNode.getAdjacentNodes()
@@ -46,7 +46,6 @@ public class Warshall<T> {
     private ArrayList<GraphNode<T>> getPath(GraphNode<T> pNode){
         ArrayList<GraphNode<T>> list = new ArrayList<GraphNode<T>>();
         while(pNode != null){
-            System.out.println(pNode);
             list.add(0,pNode);
             pNode = pNode.getLast();
         }
