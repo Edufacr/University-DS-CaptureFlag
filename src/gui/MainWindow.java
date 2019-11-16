@@ -3,25 +3,31 @@ package gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import common.IConstants;
 
-public class mainWindow implements IConstants{
-	
-	private JFrame frame;
+public class MainWindow extends JFrame implements IConstants{
+
+	private JPanel gamePanel;
 	private JPanel[][] cells;
 	
-	public mainWindow() {
+	public MainWindow() {
+		super(WINDOW_NAME);
+		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		super.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		super.setResizable(false);
+		
 		this.cells = new JPanel[GRID_WIDTH][GRID_HEIGHT];
 		
-		this.frame =  new JFrame(WINDOW_NAME);
-		this.frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-		this.frame.setResizable(false);
-		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.frame.setLayout(new GridLayout(GRID_WIDTH, GRID_HEIGHT));
+		this.gamePanel =  new JPanel();
+		this.gamePanel.setSize(GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
+		this.gamePanel.setLayout(new GridLayout(GRID_WIDTH, GRID_HEIGHT));
 		this.fillGrid();
-		this.frame.setVisible(true);
+		super.add(this.gamePanel, BorderLayout.CENTER);
+		super.setVisible(true);
+		
 	}
 	
 	public void fillGrid() {
@@ -36,12 +42,12 @@ public class mainWindow implements IConstants{
 					current.setBackground(Color.blue);
 				} else {current.setBackground(Color.green);}
 				
-				this.frame.add(current);
+				this.gamePanel.add(current);
 			}
 		}
 	}
 	
 	public static void main(String[] args) {
-		mainWindow window = new mainWindow();
+		MainWindow window = new MainWindow();
 	}
 }
