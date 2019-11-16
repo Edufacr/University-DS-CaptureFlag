@@ -1,4 +1,4 @@
-package graph;
+package model.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -159,6 +159,7 @@ public class Graph<T> {
 		Graph<String> g = new Graph<String>();
 		Dijkstra<String> d = new Dijkstra<String>();
 		Kruskal<String> k = new Kruskal<String>();
+		Warshall<String> w = new Warshall<String>();
 		
 		g.addNode("A");
 		g.addNode("B");
@@ -176,8 +177,14 @@ public class Graph<T> {
 		g.addEdge("E", "A", 14);
 		g.addEdge("E", "F", 8);
 		
-		System.out.println("Graph edges: " + g.getEdges() + "\n");
+		System.out.println("Graph: ");
+		g.print();
+		
+		System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
+		
 		System.out.println("Dijkstra path: " + d.calculateDijkstra(g, "D", "F") + "\n");
-		System.out.println("Kruskal path: " + k.getPath(g, "D", "F"));
+		System.out.println("Kruskal path: " + k.getPath(g, "D", "F") + "\n");
+		w.calculateWarshall(g);
+		System.out.println("Warshall path: " + w.getPath("D", "F"));
 	}
 }
