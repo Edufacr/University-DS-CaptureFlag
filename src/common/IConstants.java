@@ -9,4 +9,11 @@ public interface IConstants {
 	public static final int CELL_HEIGHT = 32;
 	
 	public static final String WINDOW_NAME = "Capture the Flag";
+	
+	public static final String JSON_PATH = "maps/map.json";
+	public static final String ARRAY_KEY = "obstacles";
+	public static final String FIRST_X = "x1";
+	public static final String SECOND_X = "x2";
+	public static final String FIRST_Y = "y1";
+	public static final String SECOND_Y = "y2";
 }
