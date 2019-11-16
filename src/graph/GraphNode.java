@@ -6,14 +6,15 @@ public class GraphNode<T> {
 	private T contents;
 	private boolean visited;
 	private ArrayList<GraphNode<T>> adjacentNodes;
-	private ArrayList<Integer> weights;
+	private ArrayList<Edge<T>> edges;
 	private GraphNode<T> last;
 	
 	public GraphNode(T pContents) {
 		this.contents = pContents;
 		this.adjacentNodes = new ArrayList<GraphNode<T>>();
-		this.weights = new ArrayList<Integer>();
+		this.edges = new ArrayList<Edge<T>>();
 		this.last = null;
+		this.visited = false;
 	}
 
 	public T getContents() {
@@ -24,8 +25,8 @@ public class GraphNode<T> {
 		return this.adjacentNodes;
 	}
 	
-	public ArrayList<Integer> getWeights(){
-		return this.weights;
+	public ArrayList<Edge<T>> getEdges(){
+		return this.edges;
 	}
 	
 	public boolean isVisited() {
@@ -57,21 +58,53 @@ public class GraphNode<T> {
 		return null;
 	}
 	
+	public Edge<T> getEdge(GraphNode<T> pNode){
+		for (Edge<T> edge : this.edges) {
+			if (edge.getNodes().get(1).equals(pNode)) {
+				return edge;
+			}
+		}
+		return null;
+	}
+	
 	public int getWeight(T pValue) {
 		GraphNode<T> node = this.getAdjacent(pValue);
-		if (node != null) {
-			int index = this.adjacentNodes.indexOf(node);
-			return this.weights.get(index);
+		if (node == null) {
+			return Integer.MAX_VALUE;
 		}
-		return 0;
+		Edge<T> edge = this.getEdge(node);
+		return edge.getWeight();
+	}
+	
+	public int getWeight(GraphNode<T> pNode) {
+		if (this.adjacentNodes.contains(pNode)) {
+			Edge<T> edge = this.getEdge(pNode);
+			return edge.getWeight();
+		} else if(this.equals(pNode)) {
+			return 0;
+		}
+		return Integer.MAX_VALUE;
 	}
 	
 	public void addEdge(GraphNode<T> pNode, int pWeight) {
 		if (!this.adjacentNodes.contains(pNode)) {
 			this.adjacentNodes.add(pNode);
-			this.weights.add(pWeight);
+			this.edges.add(new Edge<T>(this, pNode, pWeight));
 		}
 	}
 	
+	public GraphNode<T> copy(){
+		return new GraphNode<T>(this.contents);
+	}
+
+	@Override
+	public boolean equals(Object pObject) {
+		GraphNode<T> node = (GraphNode<T>) pObject;
+		return this.getContents().equals(node.getContents());
+	}
 	
+	@Override
+	public String toString() {
+		return this.contents.toString();
+	}
 }

@@ -3,13 +3,16 @@ package graph;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ArrayDeque;
+import java.util.Collections;
 
 public class Graph<T> {
 	private ArrayList<GraphNode<T>> nodes;
+	private ArrayList<Edge<T>> edges;
 	private HashMap<T, GraphNode<T>> directory;
 	
 	public Graph() {
 		this.nodes = new ArrayList<GraphNode<T>>();
+		this.edges = new ArrayList<Edge<T>>();
 		this.directory = new HashMap<T, GraphNode<T>>();
 	}
 	
@@ -18,6 +21,12 @@ public class Graph<T> {
 			GraphNode<T> node = new GraphNode<T>(pValue);
 			nodes.add(node);
 			directory.put(pValue, node);
+		}
+	}
+	public void addNode(GraphNode<T> pNode){
+		if (!directory.containsKey(pNode.getContents())) {
+			nodes.add(pNode);
+			directory.put(pNode.getContents(),pNode);
 		}
 	}
 	
@@ -38,6 +47,17 @@ public class Graph<T> {
 			GraphNode<T> node2 = directory.get(pValue2);
 			node1.addEdge(node2, pWeight);
 			node2.addEdge(node1, pWeight);
+			this.edges.add(node1.getEdge(node2));
+			this.edges.add(node2.getEdge(node1));
+		}
+	}
+	
+	public void addEdge(GraphNode<T> pNode1, GraphNode<T> pNode2, int pWeight) {
+		if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
+			pNode1.addEdge(pNode2, pWeight);
+			pNode2.addEdge(pNode1, pWeight);
+			this.edges.add(pNode1.getEdge(pNode2));
+			this.edges.add(pNode2.getEdge(pNode1));
 		}
 	}
 	
@@ -83,10 +103,6 @@ public class Graph<T> {
 		return null;
 	}
 	
-	public T getHome() {
-		return this.nodes.get(0).getContents();
-	}
-	
 	private ArrayList<T> generatePath(ArrayList<T> pArray, GraphNode<T> pNode){
 		if (pNode == null) {
 			return pArray;
@@ -96,11 +112,10 @@ public class Graph<T> {
 		}
 	}
 	
-	
 	public void print() {
 		for (GraphNode<T> node : this.nodes) {
-			System.out.println("Nodo: " + node.getContents());
-			System.out.print("Adyacentes: ");
+			System.out.println("Node: " + node.getContents());
+			System.out.print("Adjacent: ");
 			for (GraphNode<T> adjNode : node.getAdjacentNodes()) {
 				System.out.print("" + adjNode.getContents() + " ");
 			}
@@ -109,25 +124,60 @@ public class Graph<T> {
 		}
 	}
 	
+	public boolean contains(T pValue) {
+		if (this.directory.containsKey(pValue)) {
+			return true;
+		}
+		return false;
+	}
 	
+	public GraphNode<T> getNode(T pValue){
+		if (this.directory.containsKey(pValue)) {
+			return this.directory.get(pValue);
+		}
+		return null;
+	}
+	
+	public ArrayList<GraphNode<T>> getNodes(){
+		return this.nodes;
+	}
+	
+	public ArrayList<Edge<T>> getEdges(){
+		Collections.sort(this.edges);
+		return this.edges;
+	}
+	
+	int getSize() {
+		return this.nodes.size();
+	}
+
+	boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
+		return pNode1.getAdjacentNodes().contains(pNode2);
+	}
+
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
+		Dijkstra<String> d = new Dijkstra<String>();
+		Kruskal<String> k = new Kruskal<String>();
+		
 		g.addNode("A");
 		g.addNode("B");
 		g.addNode("C");
 		g.addNode("D");
 		g.addNode("E");
+		g.addNode("F");
+		g.addNode("F");
 		
 		g.addEdge("A", "C", 5);
 		g.addEdge("A", "D", 7);
+		g.addEdge("C", "E", 9);
 		g.addEdge("B", "C", 1);
 		g.addEdge("B", "E", 3);
+		g.addEdge("E", "A", 14);
+		g.addEdge("E", "F", 8);
 		
-		ArrayList<String> path = g.getPath("A", "E");
-	
-		System.out.println(path + "\n");
-
-		System.out.println(g.getWeight("A", "D"));
-		
+		System.out.println("Graph edges: " + g.getEdges() + "\n");
+		System.out.println("Dijkstra path: " + d.calculateDijkstra(g, "D", "F") + "\n");
+		System.out.println("Kruskal path: " + k.getPath(g, "D", "F"));
 	}
 }
