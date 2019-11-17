@@ -1,54 +1,57 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import common.IConstants;
 
 public class MainWindow extends JFrame implements IConstants{
 
-	private JPanel gamePanel;
-	private JPanel[][] cells;
+	private GameFrame gameFrame;
+	private InfoPanel player1Info;
+	private InfoPanel player2Info;
+	private JButton ready;
+	private ActionListener playerReady;
 	
 	public MainWindow() {
+		// Initializes main window JFrame
 		super(WINDOW_NAME);
 		super.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		super.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+		super.setLayout(null);
 		super.setResizable(false);
 		
-		this.cells = new JPanel[GRID_WIDTH][GRID_HEIGHT];
+		// Initializes panels
+		this.gameFrame = new GameFrame();
+		this.player1Info = new InfoPanel(PLAYER_1, 5, 5);
+		this.player2Info = new InfoPanel(PLAYER_2, 1227, 5);
 		
-		this.gamePanel =  new JPanel();
-		this.gamePanel.setSize(GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
-		this.gamePanel.setLayout(new GridLayout(GRID_WIDTH, GRID_HEIGHT));
-		this.fillGrid();
-		super.add(this.gamePanel, BorderLayout.CENTER);
+		//Initializes button
+		this.createListeners();
+		this.ready = new JButton(BUTTON_TEXT);
+		this.ready.setBounds(BUTTON_X, BUTTON_Y, 100, 40);
+		this.ready.addActionListener(this.playerReady);
+		
+		
+		//Adds componentss and sets JFrame visible
+		super.add(this.player1Info);
+		super.add(this.gameFrame);
+		super.add(this.player2Info);
+		super.add(this.ready);
 		super.setVisible(true);
-		
 	}
 	
-	public void fillGrid() {
-		JPanel current;
-		for (int i = 0; i < GRID_WIDTH; i++) {
-			for (int j = 0; j < GRID_HEIGHT; j++) {
-				cells[i][j] =  new JPanel();
-				current = cells[i][j];
-				current.setSize(CELL_WIDTH, CELL_HEIGHT);
-				
-				if ((i+j)%2!=0) {
-					current.setBackground(Color.blue);
-				} else {current.setBackground(Color.green);}
-				
-				this.gamePanel.add(current);
-			}
-		}
+	public void createListeners() {
+		this.playerReady = new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.out.println(BUTTON_TEXT);
+			};
+        };
 	}
 	
 	public static void main(String[] args) {
-		MainWindow window = new MainWindow();
-		System.out.println("A");
+		new MainWindow();
 	}
 }
