@@ -2,9 +2,11 @@ package common;
 
 public interface IConstants {
 	public static final int WINDOW_WIDTH = 1400;
-	public static final int WINDOW_HEIGHT = 800;
+	public static final int WINDOW_HEIGHT = 824;
 	public static final int GAME_PANEL_WIDTH = 1024;
 	public static final int GAME_PANEL_HEIGHT = 800;
+	public static final int INFO_PANEL_WIDTH = 188;
+	public static final int INFO_PANEL_HEIGHT = 800;
 	public static final int GRID_HEIGHT = 25;
 	public static final int GRID_WIDTH = 32;
 	public static final int CELL_WIDTH = 32;
