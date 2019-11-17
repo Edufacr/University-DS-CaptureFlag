@@ -1,6 +1,7 @@
 package common;
 
 public interface IConstants {
+	public static final String WINDOW_NAME = "Capture the Flag";
 	public static final int WINDOW_WIDTH = 1420;
 	public static final int WINDOW_HEIGHT = 900;
 	
@@ -15,13 +16,23 @@ public interface IConstants {
 	public static final int CELL_WIDTH = 32;
 	public static final int CELL_HEIGHT = 32;
 	
-	public static final int BUTTON_X = 670;
-	public static final int BUTTON_Y = 825;
+	public static final String READY_BUTTON_TEXT = "Ready";
+	public static final int READY_BUTTON_X = 670;
+	public static final int READY_BUTTON_Y = 825;
+
+	public static final String LOGIN_BUTTON_TEXT = "Login";
+	public static final int LOGIN_BUTTON_X = 200;
+	public static final int LOGIN_BUTTON_Y = 240;
+	public static final int LOGIN_PANEL_X = 400;
+	public static final int LOGIN_PANEL_Y = 300;
+	public static final int LOGIN_PANEL_WIDTH = 500;
+	public static final int LOGIN_PANEL_HEIGHT = 300;
 	
-	public static final String WINDOW_NAME = "Capture the Flag";
+	public static final int BUTTON_WIDTH = 100;
+	public static final int BUTTON_HEIGHT = 40;
+	
 	public static final String PLAYER_1 = "Player 1";
 	public static final String PLAYER_2 = "Player 2";
-	public static final String BUTTON_TEXT = "Ready";
 	
 	public static final String JSON_PATH = "maps/mapa2.json";
 	public static final String ARRAY_KEY = "obstaculos";
