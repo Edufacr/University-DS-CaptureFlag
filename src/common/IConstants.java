@@ -5,34 +5,75 @@ public interface IConstants {
 	public static final int WINDOW_WIDTH = 1420;
 	public static final int WINDOW_HEIGHT = 900;
 	
+	public static final int GAME_PANEL_X = 198;
+	public static final int GAME_PANEL_Y = 5;
 	public static final int GAME_PANEL_WIDTH = 1024;
 	public static final int GAME_PANEL_HEIGHT = 810;
-	
-	public static final int INFO_PANEL_WIDTH = 188;
-	public static final int INFO_PANEL_HEIGHT = 810;
 	
 	public static final int GRID_HEIGHT = 25;
 	public static final int GRID_WIDTH = 32;
 	public static final int CELL_WIDTH = 32;
 	public static final int CELL_HEIGHT = 32;
-	
+
 	public static final String READY_BUTTON_TEXT = "Ready";
 	public static final int READY_BUTTON_X = 670;
 	public static final int READY_BUTTON_Y = 825;
 
+	
+	
 	public static final String LOGIN_BUTTON_TEXT = "Login";
 	public static final int LOGIN_BUTTON_X = 200;
 	public static final int LOGIN_BUTTON_Y = 240;
+	
 	public static final int LOGIN_PANEL_X = 400;
 	public static final int LOGIN_PANEL_Y = 300;
 	public static final int LOGIN_PANEL_WIDTH = 500;
 	public static final int LOGIN_PANEL_HEIGHT = 300;
 	
+	public static final String LOGIN_PANEL_TITLE= "Login";
+	public static final int TITLE_FONT_SIZE = 20;
+	public static final int LOGIN_TITLE_X = 220;
+	public static final int LOGIN_TITLE_Y = 20;
+	public static final int LOGIN_TITLE_WIDTH = 80;
+	public static final int LOGIN_TITLE_HEIGHT = 30;
+	
+	public static final String EMAIL_ENTRY_LABEL = "Email:";
+	public static final int EMAIL_LABEL_X = 50;
+	public static final int EMAIL_LABEL_Y = 70;
+	public static final int EMAIL_LABEL_WIDTH = 100;
+	public static final int EMAIL_LABEL_HEIGHT = 30;
+	public static final int EMAIL_ENTRY_X = 160;
+	public static final int EMAIL_ENTRY_Y = 80;
+	public static final int EMAIL_ENTRY_WIDTH = 250;
+	public static final int EMAIL_ENTRY_HEIGHT = 30;
+	
+	public static final String PASSWORD_ENTRY_LABEL = "Password:";
+	public static final int PASSWORD_LABEL_X = 50;
+	public static final int PASSWORD_LABEL_Y = 130;
+	public static final int PASSWORD_LABEL_WIDTH = 100;
+	public static final int PASSWORD_LABEL_HEIGHT = 30;
+	public static final int PASSWORD_ENTRY_X = 160;
+	public static final int PASSWORD_ENTRY_Y = 130;
+	public static final int PASSWORD_ENTRY_WIDTH = 250;
+	public static final int PASSWORD_ENTRY_HEIGHT = 30;
+	
+	
 	public static final int BUTTON_WIDTH = 100;
 	public static final int BUTTON_HEIGHT = 40;
 	
+	
+	
+	public static final int INFO_PANEL_WIDTH = 188;
+	public static final int INFO_PANEL_HEIGHT = 810;
+	
 	public static final String PLAYER_1 = "Player 1";
+	public static final int PLAYER_1_INFO_X = 5;
+	public static final int PLAYER_1_INFO_Y = 5;
 	public static final String PLAYER_2 = "Player 2";
+	public static final int PLAYER_2_INFO_X = 1227;
+	public static final int PLAYER_2_INFO_Y = 5;
+	public static final int PLAYER_NAME_X = 20;
+	public static final int PLAYER_NAME_Y = 20;
 	
 	public static final String JSON_PATH = "maps/mapa2.json";
 	public static final String ARRAY_KEY = "obstaculos";

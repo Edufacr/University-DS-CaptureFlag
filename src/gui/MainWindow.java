@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 
 import common.IConstants;
 
@@ -30,8 +29,8 @@ public class MainWindow extends JFrame implements IConstants{
 		
 		// Initializes game panels
 		this.gameFrame = new GameFrame();
-		this.player1Info = new InfoPanel(PLAYER_1, 5, 5);
-		this.player2Info = new InfoPanel(PLAYER_2, 1227, 5);
+		this.player1Info = new InfoPanel(PLAYER_1, PLAYER_1_INFO_X, PLAYER_1_INFO_Y);
+		this.player2Info = new InfoPanel(PLAYER_2, PLAYER_2_INFO_X, PLAYER_2_INFO_Y);
 		
 		//Initializes buttons
 		this.createListeners();
@@ -64,6 +63,8 @@ public class MainWindow extends JFrame implements IConstants{
 	}
 	
 	private void initGameArea() {
+		System.out.println(this.loginPanel.getEmail());
+		System.out.println(this.loginPanel.getPassword());
 		this.loginButton.setVisible(false);
 		this.loginPanel.setVisible(false);
 		super.add(this.player1Info);

@@ -15,7 +15,7 @@ public class GameFrame extends JPanel implements IConstants{
 	
 	public GameFrame() {
 		super();
-		super.setBounds(INFO_PANEL_WIDTH+10, 5, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
+		super.setBounds(GAME_PANEL_X, GAME_PANEL_Y, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
 		super.setLayout(new GridLayout(GRID_WIDTH, GRID_HEIGHT));
 		super.setBorder(BorderFactory.createLineBorder(Color.black));
 		

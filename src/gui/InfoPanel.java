@@ -19,7 +19,7 @@ public class InfoPanel extends JPanel implements IConstants {
 		super.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.playerName = new JLabel(pPlayerName);
-		this.playerName.setLocation(20, 20);
+		this.playerName.setLocation(PLAYER_NAME_X, PLAYER_NAME_Y);
 		super.add(this.playerName);
 	}
 }
