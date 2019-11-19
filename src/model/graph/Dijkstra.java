@@ -3,7 +3,7 @@ package model.graph;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class Dijkstra <T>{
+public class Dijkstra <T> implements IGraphPathGettable<T> {
 	private ArrayList<GraphNode<T>> path;
 	private Hashtable<GraphNode<T>, Integer> set;
 	private ArrayList<GraphNode<T>> visited;
@@ -104,5 +104,10 @@ public class Dijkstra <T>{
 		}
 		this.buildPath(pNode.getLast());
 		this.path.add(pNode);
+	}
+
+	@Override
+	public ArrayList<GraphNode<T>> getPath(Graph<T> pGraph, T pStartContent, T pEndContent) {
+		return calculateDijkstra(pGraph, pStartContent, pEndContent);
 	}
 }

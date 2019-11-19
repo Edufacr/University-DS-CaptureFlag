@@ -2,7 +2,7 @@ package model.graph;
 
 import java.util.ArrayList;
 
-public class Warshall<T> {
+public class Warshall<T> implements IGraphPathGettable<T> {
     private Graph<T> original;
     private Graph<T> copy;
     public Warshall(){
@@ -102,5 +102,11 @@ public class Warshall<T> {
         g1.print();
         w.calculateWarshall(g1);
         System.out.println(w.getPath(1,4).toString());
+    }
+
+    @Override
+    public ArrayList<GraphNode<T>> getPath(Graph<T> pGraph, T pStartContent, T pEndContent) {
+        calculateWarshall(pGraph);
+        return getPath(pStartContent, pEndContent);
     }
 }

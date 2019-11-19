@@ -182,9 +182,8 @@ public class Graph<T> {
 		
 		System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
 		
-		System.out.println("Dijkstra path: " + d.calculateDijkstra(g, "D", "F") + "\n");
+		System.out.println("Dijkstra path: " + d.getPath(g, "D", "F") + "\n");
 		System.out.println("Kruskal path: " + k.getPath(g, "D", "F") + "\n");
-		w.calculateWarshall(g);
-		System.out.println("Warshall path: " + w.getPath("D", "F"));
+		System.out.println("Warshall path: " + w.getPath(g,"D", "F"));
 	}
 }
