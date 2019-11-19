@@ -2,7 +2,7 @@ package model.characters;
 
 import common.IConstants;
 
-public class Character implements IConstants, IMovementType{
+public class Character implements IConstants{
 	protected int healthPoints;
 	protected int attackPower;
 	protected int attackTime;
@@ -24,6 +24,8 @@ public class Character implements IConstants, IMovementType{
 	}
 	
 	protected void setMovementType() {}
-	
-	public void move() {}
+
+	protected boolean isDead(){
+		return healthPoints <= 0;
+	}
 }
