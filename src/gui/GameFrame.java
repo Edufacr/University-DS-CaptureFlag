@@ -51,9 +51,6 @@ public class GameFrame extends JPanel implements IConstants{
 		for (int[] coordinates : this.obstacleCoordinates) {
 			this.paintRectangle(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
 		}
-		
-		super.validate();
-		super.repaint();
 	}
 	
 	private void paintRectangle(int pCoordinateX1, int pCoordinateY1, int pCoordinateX2, int pCoordinateY2) {
