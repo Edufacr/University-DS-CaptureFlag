@@ -74,8 +74,6 @@ public class MainWindow extends JFrame implements IConstants{
             public void mouseClicked(MouseEvent e) {
             	System.out.println(e.getX() + ", " + e.getY());
                 gameFrame.getComponentAt(e.getX(), e.getY()).setBackground(Color.blue);
-                validate();
-                repaint();
             }
         };
         
