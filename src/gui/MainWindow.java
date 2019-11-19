@@ -5,13 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import common.IConstants;
-import model.JsonManager;
 
 public class MainWindow extends JFrame implements IConstants{
 
@@ -25,9 +23,6 @@ public class MainWindow extends JFrame implements IConstants{
 	private ActionListener login;
 	
 	private MouseAdapter gamePanelListener;
-	
-	private JsonManager mapLoader;
-	private ArrayList<int[]> obstacleCoordinates;
 	
 	public MainWindow() {
 		// Initializes main window JFrame
@@ -91,26 +86,10 @@ public class MainWindow extends JFrame implements IConstants{
 		this.loginPanel.getPassword();
 		super.remove(this.loginButton);
 		super.remove(this.loginPanel);
-		this.loadObstacles();
 		super.add(this.player1Info);
 		super.add(this.gameFrame);
 		super.add(this.player2Info);
 		super.add(this.ready);
-		super.validate();
-		super.repaint();
-	}
-	
-	private void loadObstacles() {
-		this.mapLoader = JsonManager.getInstance();
-		this.obstacleCoordinates = this.mapLoader.getCoordinates();
-		
-		
-		for (int[] coordinates : this.obstacleCoordinates) {
-			this.gameFrame.findComponentAt(coordinates[0], coordinates[1]).setBackground(Color.red);
-			this.gameFrame.findComponentAt(coordinates[0], coordinates[3]).setBackground(Color.red);
-			this.gameFrame.findComponentAt(coordinates[2], coordinates[1]).setBackground(Color.red);
-			this.gameFrame.findComponentAt(coordinates[2], coordinates[3]).setBackground(Color.red);
-		}
 		super.validate();
 		super.repaint();
 	}
