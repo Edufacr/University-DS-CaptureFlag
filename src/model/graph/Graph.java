@@ -45,10 +45,7 @@ public class Graph<T> {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
 			GraphNode<T> node1 = directory.get(pValue1);
 			GraphNode<T> node2 = directory.get(pValue2);
-			node1.addEdge(node2, pWeight);
-			node2.addEdge(node1, pWeight);
-			this.edges.add(node1.getEdge(node2));
-			this.edges.add(node2.getEdge(node1));
+			addEdge(node1,node2,pWeight);
 		}
 	}
 	
@@ -58,6 +55,24 @@ public class Graph<T> {
 			pNode2.addEdge(pNode1, pWeight);
 			this.edges.add(pNode1.getEdge(pNode2));
 			this.edges.add(pNode2.getEdge(pNode1));
+		}
+	}
+
+	public void removeEdge(T pValue1, T pValue2){
+		if(directory.containsKey(pValue1) && directory.containsKey(pValue2)){
+			GraphNode<T> node1 = directory.get(pValue1);
+			GraphNode<T> node2 = directory.get(pValue2);
+
+		}
+	}
+	public void removeEdge(GraphNode<T> pNode1, GraphNode<T> pNode2){
+
+	}
+
+	public void removeEdges(T pValue){
+		GraphNode<T> node = directory.get(pValue);
+		for (GraphNode<T> adjacent:node.getAdjacentNodes()
+			 ) {
 		}
 	}
 	
@@ -125,10 +140,7 @@ public class Graph<T> {
 	}
 	
 	public boolean contains(T pValue) {
-		if (this.directory.containsKey(pValue)) {
-			return true;
-		}
-		return false;
+		return this.directory.containsKey(pValue);
 	}
 	
 	public GraphNode<T> getNode(T pValue){
