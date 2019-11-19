@@ -10,11 +10,12 @@ public class Team<T> {
     ArrayList<Character> members;
 
     public Team(IGraphPathGettable<T> pPathGetter){
-
+        members = new ArrayList<Character>();
+        pathGetter = pPathGetter;
     }
 
-    public void addMember(java.lang.Character pCharacter){
-
+    public void addMember(Character pCharacter){
+        members.add(pCharacter);
     }
 
     public void receiveDamage(int pDamage){
@@ -32,4 +33,9 @@ public class Team<T> {
             pOpponentTeam.receiveDamage(member.getAttackPower());
         }
     }
+
+    public boolean isEmpty(){
+        return members.isEmpty();
+    }
+
 }
