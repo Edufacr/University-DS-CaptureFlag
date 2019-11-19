@@ -10,11 +10,11 @@ public class Character implements IConstants, IMovementType{
 	protected Character() {
 		this.healthPoints = CHARACTER_HP;
 	}
-	
-	protected int attack() {
+
+	protected int getAttackPower() {
 		return this.attackPower;
 	}
-	
+
 	protected void takeDamage(int pDamage) {
 		this.healthPoints -= pDamage;
 	}
