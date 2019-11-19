@@ -6,9 +6,9 @@ public interface IConstants {
 	public static final int WINDOW_HEIGHT = 900;
 	
 	public static final int GAME_PANEL_X = 198;
-	public static final int GAME_PANEL_Y = 5;
+	public static final int GAME_PANEL_Y = 15;
 	public static final int GAME_PANEL_WIDTH = 1024;
-	public static final int GAME_PANEL_HEIGHT = 810;
+	public static final int GAME_PANEL_HEIGHT = 800;
 	
 	public static final int GRID_HEIGHT = 25;
 	public static final int GRID_WIDTH = 32;
@@ -64,18 +64,18 @@ public interface IConstants {
 	
 	
 	public static final int INFO_PANEL_WIDTH = 188;
-	public static final int INFO_PANEL_HEIGHT = 810;
+	public static final int INFO_PANEL_HEIGHT = 800;
 	
 	public static final String PLAYER_1 = "Player 1";
 	public static final int PLAYER_1_INFO_X = 5;
-	public static final int PLAYER_1_INFO_Y = 5;
+	public static final int PLAYER_1_INFO_Y = 15;
 	public static final String PLAYER_2 = "Player 2";
 	public static final int PLAYER_2_INFO_X = 1227;
-	public static final int PLAYER_2_INFO_Y = 5;
+	public static final int PLAYER_2_INFO_Y = 15;
 	public static final int PLAYER_NAME_X = 20;
 	public static final int PLAYER_NAME_Y = 20;
 	
-	public static final String JSON_PATH = "maps/mapa2.json";
+	public static final String JSON_PATH = "maps/mapa3.json";
 	public static final String ARRAY_KEY = "obstaculos";
 	public static final String FIRST_X = "x1";
 	public static final String SECOND_X = "x2";
