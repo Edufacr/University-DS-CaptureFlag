@@ -6,4 +6,9 @@ public class Marine extends Character{
 		super.attackPower = MARINE_ATTACK_POWER;
 		super.attackTime = MARINE_ATTACK_TIME;
 	}
+	
+	@Override
+	public String toString() {
+		return "Marine: " + this.healthPoints;
+	}
 }
