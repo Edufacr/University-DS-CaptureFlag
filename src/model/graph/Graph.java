@@ -146,14 +146,15 @@ public class Graph<T> {
 		Collections.sort(this.edges);
 		return this.edges;
 	}
+	public boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
+		return pNode1.getAdjacentNodes().contains(pNode2);
+	}
 	
 	int getSize() {
 		return this.nodes.size();
 	}
 
-	boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
-		return pNode1.getAdjacentNodes().contains(pNode2);
-	}
+
 
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
