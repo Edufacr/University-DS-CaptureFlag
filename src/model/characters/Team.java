@@ -1,15 +1,16 @@
 package model.characters;
 
+import model.Square;
 import model.graph.IGraphPathGettable;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Team<T> {
-    IGraphPathGettable<T> pathGetter;
+public class Team {
+    IGraphPathGettable<Square> pathGetter;
     ArrayList<Character> members;
 
-    public Team(IGraphPathGettable<T> pPathGetter){
+    public Team(IGraphPathGettable<Square> pPathGetter){
         members = new ArrayList<Character>();
         pathGetter = pPathGetter;
     }

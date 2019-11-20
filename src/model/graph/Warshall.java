@@ -3,11 +3,18 @@ package model.graph;
 import java.util.ArrayList;
 
 public class Warshall<T> implements IGraphPathGettable<T> {
+    private static Warshall singleton;
     private Graph<T> original;
     private Graph<T> connectionGraph;
     public Warshall(){
         connectionGraph = null;
         original = null;
+    }
+    public static Warshall getInstance(){
+        if (singleton == null) {
+            singleton = new Warshall();
+        }
+        return singleton;
     }
     @Override
     public ArrayList<GraphNode<T>> getPath(Graph<T> pGraph, T pStartContent, T pEndContent) {
@@ -97,7 +104,7 @@ public class Warshall<T> implements IGraphPathGettable<T> {
 
     public static void main(String[] args) {
         Graph<Integer> g1 = new Graph<Integer>();
-        Warshall<Integer> w = new Warshall<Integer>();
+        Warshall<Integer> w = Warshall.getInstance();
         g1.addNode(1);
         g1.addNode(2);
         g1.addNode(3);
