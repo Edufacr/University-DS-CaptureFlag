@@ -52,12 +52,17 @@ public class Graph<T> {
 	}
 	
 	public void addEdge(GraphNode<T> pNode1, GraphNode<T> pNode2, int pWeight) {
-		if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
-			pNode1.addEdge(pNode2, pWeight);
-			pNode2.addEdge(pNode1, pWeight);
-			this.edges.add(pNode1.getEdge(pNode2));
-			this.edges.add(pNode2.getEdge(pNode1));
+		try{
+			if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
+				pNode1.addEdge(pNode2, pWeight);
+				pNode2.addEdge(pNode1, pWeight);
+				this.edges.add(pNode1.getEdge(pNode2));
+				this.edges.add(pNode2.getEdge(pNode1));
+			}
 		}
+		catch (Exception ignored){
+		}
+
 	}
 
 	public void removeEdge(T pValue1, T pValue2){
@@ -162,6 +167,15 @@ public class Graph<T> {
 			return this.directory.get(pValue);
 		}
 		return null;
+	}
+
+	public GraphNode<T>getNode(int pNodePos){
+		try{
+			return nodes.get(pNodePos);
+		}
+		catch (Exception e){
+			return null;
+		}
 	}
 	
 	public ArrayList<GraphNode<T>> getNodes(){
