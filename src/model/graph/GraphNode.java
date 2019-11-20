@@ -92,6 +92,13 @@ public class GraphNode<T> {
 			this.edges.add(new Edge<T>(this, pNode, pWeight));
 		}
 	}
+
+	public void removeEdge(GraphNode<T> pNode){
+		if(adjacentNodes.contains(pNode)){
+			adjacentNodes.remove(pNode);
+			edges.remove(getEdge(pNode));
+		}
+	}
 	
 	public GraphNode<T> copy(){
 		return new GraphNode<T>(this.contents);

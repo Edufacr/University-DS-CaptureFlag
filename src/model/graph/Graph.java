@@ -45,10 +45,7 @@ public class Graph<T> {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
 			GraphNode<T> node1 = directory.get(pValue1);
 			GraphNode<T> node2 = directory.get(pValue2);
-			node1.addEdge(node2, pWeight);
-			node2.addEdge(node1, pWeight);
-			this.edges.add(node1.getEdge(node2));
-			this.edges.add(node2.getEdge(node1));
+			addEdge(node1,node2,pWeight);
 		}
 	}
 	
@@ -60,6 +57,36 @@ public class Graph<T> {
 			this.edges.add(pNode2.getEdge(pNode1));
 		}
 	}
+
+	public void removeEdge(T pValue1, T pValue2){
+		if(directory.containsKey(pValue1) && directory.containsKey(pValue2)){
+			GraphNode<T> node1 = directory.get(pValue1);
+			GraphNode<T> node2 = directory.get(pValue2);
+			removeEdge(node1,node2);
+		}
+	}
+	public void removeEdge(GraphNode<T> pNode1, GraphNode<T> pNode2){
+        if (directory.containsValue(pNode1) && directory.containsValue(pNode2)){
+            edges.remove(pNode1.getEdge(pNode2));
+            edges.remove(pNode2.getEdge(pNode1));
+            pNode1.removeEdge(pNode2);
+            pNode2.removeEdge(pNode1);
+        }
+	}
+
+	public void removeEdges(T pValue){
+	    if(directory.containsKey(pValue)){
+	        removeEdges(directory.get(pValue));
+        }
+	}
+
+	public void removeEdges(GraphNode<T> pNode){
+	    ArrayList<GraphNode<T>> list = (ArrayList<GraphNode<T>>)pNode.getAdjacentNodes().clone();
+        for (GraphNode<T> adjacent:list
+        ) {
+            removeEdge(pNode,adjacent);
+        }
+    }
 	
 	public int getWeight(T pValue1, T pValue2) {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
@@ -125,10 +152,7 @@ public class Graph<T> {
 	}
 	
 	public boolean contains(T pValue) {
-		if (this.directory.containsKey(pValue)) {
-			return true;
-		}
-		return false;
+		return this.directory.containsKey(pValue);
 	}
 	
 	public GraphNode<T> getNode(T pValue){
@@ -181,6 +205,11 @@ public class Graph<T> {
 		g.print();
 		
 		System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
+
+		g.removeEdges(g.getNode("A"));
+        g.print();
+
+        System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
 		
 		System.out.println("Dijkstra path: " + d.getPath(g, "D", "F") + "\n");
 		System.out.println("Kruskal path: " + k.getPath(g, "D", "F") + "\n");
