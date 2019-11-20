@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -12,6 +13,9 @@ import javax.swing.JFrame;
 
 import common.IConstants;
 import model.analyzer.ObstacleAnalyzer;
+import model.characters.Archer;
+import model.characters.Marine;
+import model.characters.Puncher;
 
 public class MainWindow extends JFrame implements IConstants{
 
@@ -63,7 +67,19 @@ public class MainWindow extends JFrame implements IConstants{
 	public void createListeners() {
 		this.playerReady = new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		System.out.println(READY_BUTTON_TEXT); // Temporary test
+        		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
+        		chars.add(new Archer());
+        		chars.add(new Archer());
+        		chars.add(new Archer());
+        		chars.add(new Puncher());
+        		chars.add(new Puncher());
+        		chars.add(new Puncher());
+        		chars.add(new Marine());
+        		chars.add(new Marine());
+        		chars.add(new Marine());
+        		player1Info.displayCharacters(chars);
+        		validate();
+        		repaint();
 			};
         };
         
