@@ -101,6 +101,15 @@ public interface IConstants {
 	public static final int PLAYER_NAME_X = 20;
 	public static final int PLAYER_NAME_Y = 20;
 	
+	public static final int CHARACTER_NAME_X = 0;
+	public static final int CHARACTER_NAME_Y = 0;
+	public static final int CHARACTER_INFO_X = 30;
+	public static final int CHARACTER_INFO_Y = 60;
+	public static final int CHARACTER_INFO_Y_ADJUST = 30;
+	public static final int CHARACTER_INFO_WIDTH = 100;
+	public static final int CHARACTER_INFO_HEIGHT = 30;
+	
+	
 	public static final String JSON_PATH = "maps/mapa3.json";
 	public static final String ARRAY_KEY = "obstaculos";
 	public static final String FIRST_X = "x1";

@@ -26,14 +26,14 @@ public class InfoPanel extends JPanel implements IConstants {
 		super();
 		super.setBounds(pPositionX, pPositionY, INFO_PANEL_WIDTH, INFO_PANEL_HEIGHT);
 		super.setBorder(BorderFactory.createLineBorder(Color.black));
-		
+		super.setLayout(null);
 		this.playerName = new JLabel(pPlayerName);
-		this.playerName.setLocation(PLAYER_NAME_X, PLAYER_NAME_Y);
+		this.playerName.setBounds(PLAYER_NAME_X, PLAYER_NAME_Y, CHARACTER_INFO_WIDTH, CHARACTER_INFO_HEIGHT);
 		
 		this.colorIndex = 0;
 		this.teamColors = new ArrayList<Color>();
 		this.teamColors.add(Color.RED);
-		this.teamColors.add(Color.BLUE);
+		this.teamColors.add(Color.CYAN);
 		this.teamColors.add(Color.GREEN);
 		
 		super.add(this.playerName);
@@ -41,14 +41,14 @@ public class InfoPanel extends JPanel implements IConstants {
 	
 	public void displayCharacters(ArrayList<Character> pCharacters) {
 		this.initListeners();
-		int y = 40;
+		int yCoordinate = CHARACTER_INFO_Y;
 		for (Character character : pCharacters) {
 			JPanel characterPanel = new JPanel();
 			JLabel characterName = new JLabel(character.toString());
-			characterName.setLocation(10, 10);
+			characterName.setLocation(CHARACTER_NAME_X, CHARACTER_NAME_Y);
 			characterPanel.add(characterName);
-			characterPanel.setBounds(10, y, 180, 30);
-			y += 30;
+			characterPanel.setBounds(CHARACTER_INFO_X, yCoordinate, CHARACTER_INFO_WIDTH, CHARACTER_INFO_HEIGHT);
+			yCoordinate += CHARACTER_INFO_Y_ADJUST;
 			characterPanel.addMouseListener(teamSelection);
 			super.add(characterPanel);
 		}
