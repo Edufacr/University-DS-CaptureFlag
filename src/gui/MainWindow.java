@@ -23,6 +23,8 @@ public class MainWindow extends JFrame implements IConstants{
 	private ActionListener playerReady;
 	private JButton loginButton;
 	private ActionListener login;
+	private int currentFlagY;
+	private int flagLocation;
 	
 	private MouseAdapter gamePanelListener;
 	
@@ -74,9 +76,36 @@ public class MainWindow extends JFrame implements IConstants{
         this.gamePanelListener = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	System.out.println(e.getX() + ", " + e.getY());
-            	((JComponent) gameFrame.getComponentAt(e.getX(), e.getY())).setOpaque(true);
-                gameFrame.getComponentAt(e.getX(), e.getY()).setBackground(Color.blue);
+                
+                int xCoordinate = e.getX();
+                int yCoordinate = e.getY();
+                System.out.println(xCoordinate + ", " + yCoordinate);
+                
+                if ((xCoordinate >= FLAG_MIN_X) && (xCoordinate <= FLAG_MAX_X)) {
+                	gameFrame.getComponentAt(FLAG_X, currentFlagY).setBackground(getBackground());
+                	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
+                		flagLocation = NORTH;
+                		currentFlagY = NORTH_FLAG_Y;
+                	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
+                		flagLocation = CENTER;
+                		currentFlagY = CENTER_FLAG_Y;
+                	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
+                		flagLocation = SOUTH;
+                		currentFlagY = SOUTH_FLAG_Y;
+                	}
+                	
+                	((JComponent) gameFrame.getComponentAt(FLAG_X, currentFlagY)).setOpaque(true);
+                    gameFrame.getComponentAt(FLAG_X, currentFlagY).setBackground(Color.RED);
+                	
+                } else if((xCoordinate >= OBJECTIVE_MIN_X) && (xCoordinate <= OBJECTIVE_MAX_X)) {
+                	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
+                		
+                	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
+                		
+                	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
+                		
+                	}
+                }
             }
         };
         

@@ -19,6 +19,32 @@ public interface IConstants {
 	public static final int READY_BUTTON_X = 690;
 	public static final int READY_BUTTON_Y = 825;
 
+	public static final int FLAG_MAX_X = 200;
+	public static final int FLAG_MIN_X = 0;
+	public static final int OBJECTIVE_MAX_X = 1024;
+	public static final int OBJECTIVE_MIN_X = 800;
+	public static final int NORTH_SELECTION_MAX_Y = 260;
+	public static final int NORTH_SELECTION_MIN_Y = 0;
+	public static final int CENTER_SELECTION_MAX_Y = 521;
+	public static final int CENTER_SELECTION_MIN_Y = 261;
+	public static final int SOUTH_SELECTION_MAX_Y = 800;
+	public static final int SOUTH_SELECTION_MIN_Y = 521;
+	
+	public static final int NORTH = 0;
+	public static final int CENTER = 1;
+	public static final int SOUTH = 2;
+	
+	public static final int FLAG_X = 50;
+	public static final int NORTH_FLAG_Y = 90;
+	public static final int CENTER_FLAG_Y = 360;
+	public static final int SOUTH_FLAG_Y = 690;
+	
+	public static final int NORTH_OBJECTIVE_X = 0;
+	public static final int NORTH_OBJECTIVE_Y = 0;
+	public static final int CENTER_OBJECTIVE_X = 0;
+	public static final int CENTER_OBJECTIVE_Y = 0;
+	public static final int SOUTH_OBJECTIVE_X = 0;
+	public static final int SOUTH_OBJECTIVE_Y = 0;
 	
 	
 	public static final String LOGIN_BUTTON_TEXT = "Login";
