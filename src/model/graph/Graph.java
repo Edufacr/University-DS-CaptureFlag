@@ -1,5 +1,7 @@
 package model.graph;
 
+import model.analyzer.PathAnalyzer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ArrayDeque;
@@ -170,14 +172,15 @@ public class Graph<T> {
 		Collections.sort(this.edges);
 		return this.edges;
 	}
+	public boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
+		return pNode1.getAdjacentNodes().contains(pNode2);
+	}
 	
 	int getSize() {
 		return this.nodes.size();
 	}
 
-	boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
-		return pNode1.getAdjacentNodes().contains(pNode2);
-	}
+
 
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
@@ -192,6 +195,7 @@ public class Graph<T> {
 		g.addNode("E");
 		g.addNode("F");
 		g.addNode("F");
+		g.addNode("Z");
 		
 		g.addEdge("A", "C", 5);
 		g.addEdge("A", "D", 7);
@@ -214,5 +218,13 @@ public class Graph<T> {
 		System.out.println("Dijkstra path: " + d.getPath(g, "D", "F") + "\n");
 		System.out.println("Kruskal path: " + k.getPath(g, "D", "F") + "\n");
 		System.out.println("Warshall path: " + w.getPath(g,"D", "F"));
+		PathAnalyzer<String> analyzer = new PathAnalyzer<>();
+		ArrayList<String> primaryCon = new ArrayList<>();
+		primaryCon.add("C");
+		primaryCon.add("B");
+		primaryCon.add("A");
+
+		System.out.println(analyzer.analyzeGraph(g,primaryCon));
+
 	}
 }
