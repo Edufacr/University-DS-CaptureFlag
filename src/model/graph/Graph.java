@@ -163,6 +163,13 @@ public class Graph<T> {
 		}
 		return null;
 	}
+
+	public GraphNode<T>getNode(int pNodePos){
+		if(nodes.size() > pNodePos){
+			return nodes.get(pNodePos);
+		}
+		return null;
+	}
 	
 	public ArrayList<GraphNode<T>> getNodes(){
 		return this.nodes;
