@@ -7,6 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import common.IConstants;
@@ -74,6 +75,7 @@ public class MainWindow extends JFrame implements IConstants{
             @Override
             public void mouseClicked(MouseEvent e) {
             	System.out.println(e.getX() + ", " + e.getY());
+            	((JComponent) gameFrame.getComponentAt(e.getX(), e.getY())).setOpaque(true);
                 gameFrame.getComponentAt(e.getX(), e.getY()).setBackground(Color.blue);
             }
         };
