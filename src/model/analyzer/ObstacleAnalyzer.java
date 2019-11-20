@@ -5,21 +5,21 @@ import model.JsonManager;
 
 import java.util.ArrayList;
 
-public class obstacleAnalyzer implements IConstants {
+public class ObstacleAnalyzer implements IConstants {
     private static final int X1 = 0;
     private static final int Y1 = 1;
     private static final int X2 = 2;
     private static final int Y2 = 3;
     private ArrayList<int[]> obstacleCoordinates;
 
-    public obstacleAnalyzer(){
+    public ObstacleAnalyzer(){
         JsonManager jsonManager = JsonManager.getInstance();
         obstacleCoordinates = jsonManager.getCoordinates();
     }
 
-    public ArrayList<int[]> getObstacleList(){
-        ArrayList<int[]> gridXYList = new ArrayList<>();
-        int[] gridCoordinates;
+    public ArrayList<ArrayList<Integer>> getObstacleList(){
+        ArrayList<ArrayList<Integer>> gridXYList = new ArrayList<>();
+        ArrayList<Integer> gridCoordinates;
 
         int[] squareCoordinates = new int[4];
         for (int gridY = 0; gridY < GRID_HEIGHT; gridY++){
@@ -29,9 +29,9 @@ public class obstacleAnalyzer implements IConstants {
                 squareCoordinates[X1] = squareCoordinates[X2] = CELL_WIDTH * gridX;
                 squareCoordinates[X2] += CELL_WIDTH;
                 if(isObstacle(squareCoordinates)){
-                    gridCoordinates = new int[2];
-                    gridCoordinates[X1] = gridX;
-                    gridCoordinates[Y1] = gridY;
+                    gridCoordinates = new ArrayList<>(2);
+                    gridCoordinates.add(gridX);
+                    gridCoordinates.add(gridY);
                     gridXYList.add(gridCoordinates);
                 }
             }
@@ -58,5 +58,10 @@ public class obstacleAnalyzer implements IConstants {
             }
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        ObstacleAnalyzer o = new ObstacleAnalyzer();
+        System.out.println(o.getObstacleList());
     }
 }

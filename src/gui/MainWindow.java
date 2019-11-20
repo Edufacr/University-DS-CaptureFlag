@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import common.IConstants;
+import model.analyzer.ObstacleAnalyzer;
 
 public class MainWindow extends JFrame implements IConstants{
 
@@ -93,6 +94,8 @@ public class MainWindow extends JFrame implements IConstants{
 	}
 	
 	public static void main(String[] args) {
+		ObstacleAnalyzer o = new ObstacleAnalyzer();
+		System.out.println(o.getObstacleList());
 		new MainWindow();
 	}
 }
