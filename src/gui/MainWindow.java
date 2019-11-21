@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -17,18 +19,19 @@ import model.characters.Archer;
 import model.characters.Marine;
 import model.characters.Puncher;
 
-public class MainWindow extends JFrame implements IConstants{
+public class MainWindow extends JFrame implements IConstants, Observer{
 
 	private GameFrame gameFrame;
 	private InfoPanel player1Info;
 	private InfoPanel player2Info;
 	private LoginPanel loginPanel;
-	private JButton ready;
+	private JButton readyButton;
 	private ActionListener playerReady;
 	private JButton loginButton;
 	private ActionListener login;
 	private int currentFlagY;
-	private int flagLocation;
+	private int[] flagLocation;
+	private boolean ready;
 	
 	private MouseAdapter gamePanelListener;
 	
@@ -49,9 +52,9 @@ public class MainWindow extends JFrame implements IConstants{
 		this.player2Info = new InfoPanel(PLAYER_2, PLAYER_2_INFO_X, PLAYER_2_INFO_Y);
 		
 		//Initializes buttons
-		this.ready = new JButton(READY_BUTTON_TEXT);
-		this.ready.setBounds(READY_BUTTON_X, READY_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
-		this.ready.addActionListener(this.playerReady);
+		this.readyButton = new JButton(READY_BUTTON_TEXT);
+		this.readyButton.setBounds(READY_BUTTON_X, READY_BUTTON_Y, BUTTON_WIDTH, BUTTON_HEIGHT);
+		this.readyButton.addActionListener(this.playerReady);
 		
 		
 		// Initializes login panel
@@ -67,6 +70,9 @@ public class MainWindow extends JFrame implements IConstants{
 	public void createListeners() {
 		this.playerReady = new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		if (ready) {
+        			return;
+        		}
         		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
         		chars.add(new Archer());
         		chars.add(new Archer());
@@ -80,6 +86,8 @@ public class MainWindow extends JFrame implements IConstants{
         		player1Info.displayCharacters(chars);
         		validate();
         		repaint();
+        		System.out.println(flagLocation);
+        		ready = true;
 			};
         };
         
@@ -100,13 +108,13 @@ public class MainWindow extends JFrame implements IConstants{
                 if ((xCoordinate >= FLAG_MIN_X) && (xCoordinate <= FLAG_MAX_X)) {
                 	gameFrame.getComponentAt(FLAG_X, currentFlagY).setBackground(getBackground());
                 	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
-                		flagLocation = NORTH;
+                		flagLocation = new int[] {FLAG_X_COORDINATE, NORTH_FLAG_Y_COORDINATE};
                 		currentFlagY = NORTH_FLAG_Y;
                 	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
-                		flagLocation = CENTER;
+                		flagLocation = new int[] {FLAG_X_COORDINATE, CENTER_FLAG_Y_COORDINATE};;
                 		currentFlagY = CENTER_FLAG_Y;
                 	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
-                		flagLocation = SOUTH;
+                		flagLocation = new int[] {FLAG_X_COORDINATE, SOUTH_FLAG_Y_COORDINATE};;
                 		currentFlagY = SOUTH_FLAG_Y;
                 	}
                 	
@@ -135,7 +143,7 @@ public class MainWindow extends JFrame implements IConstants{
 		super.add(this.player1Info);
 		super.add(this.gameFrame);
 		super.add(this.player2Info);
-		super.add(this.ready);
+		super.add(this.readyButton);
 		super.validate();
 		super.repaint();
 	}
@@ -144,5 +152,11 @@ public class MainWindow extends JFrame implements IConstants{
 		ObstacleAnalyzer o = new ObstacleAnalyzer();
 		System.out.println(o.getObstacleList());
 		new MainWindow();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
