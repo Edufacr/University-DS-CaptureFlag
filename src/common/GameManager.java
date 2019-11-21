@@ -10,6 +10,7 @@ import model.graph.Graph;
 import model.graph.GraphNode;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,11 +24,11 @@ public class GameManager implements IConstants {
     private ExecutorService threadPool;
 
     private boolean activeGame;
-    private ArrayList<Player> players;
+    private Vector<Player> players;
     //private ArrayList<> TODO arraylist movimientos
     
-    private Runnable moveP1;
-    private Runnable moveP2;
+    private Runnable moveTeams;
+    private Runnable fight;
 
     public GameManager(){
         graph = new Graph<>();
@@ -50,7 +51,7 @@ public class GameManager implements IConstants {
     }
     protected void isReady(){
         if(activeGame){
-            run();
+            this.threadPool.execute(this.moveTeams);
         }
         else{
             activeGame = true;
@@ -59,21 +60,34 @@ public class GameManager implements IConstants {
 
     private void run(){
         //Aqui se corre el juego cuando los dos estan ready
+    	// if fightingTeams.isEmpty() { mete equipos ; threadPool.execute(this.fight); }
+    	// else { mete equipos; }
         while(activeGame){
-
+        	// threadPool.execute(this.moveTeams);
+        	// threadPool.execute(this.fight);
+        	
         }
     }
     
     private void createMovementRunnables() {
-    	this.moveP1 = new Runnable() {
+    	this.moveTeams = new Runnable() {
     		public void run() {
-    			System.out.println("moving player1's teams");
+    			while (activeGame) {
+	    			System.out.println("moving teams");
+	    			// for (Team team : teams) { team.move(); 
+	    			// chequea si alguien ganó. Si ganó activeGame = false;
+	    			// chequea adyacencia; }
+	    			// manda mensaje
+	    			// mete equipos a lista de peleas si es necesario
+	    			// threadPool.execute(this.fight);
+    			}
     		}
     	};
     	
-    	this.moveP2 = new Runnable() {
+    	this.fight = new Runnable() {
     		public void run() {
-    			System.out.println("moving player2's teams");
+    			// pide hilos con getFightRunnable para la pelea
+    			// for (Team team : fightingTeams) {  }
     		}
     	};
     }
@@ -82,6 +96,9 @@ public class GameManager implements IConstants {
     	Runnable fight = new Runnable() {
     		public void run() {
     			System.out.println(pTeam1.toString() + " is fighting against " + pTeam2.toString());
+    			// fight.sleep(attacker_sleep_time);
+    			// pTeam1 atack pTeam2
+    			// revisa si siguen peleando
     		}
     	};
     	return fight;
