@@ -1,9 +1,11 @@
 package common;
 
 import client.Server;
+import model.Player;
 import model.Square;
 import model.analyzer.ObstacleAnalyzer;
 import model.analyzer.PathAnalyzer;
+import model.characters.Team;
 import model.graph.Graph;
 import model.graph.GraphNode;
 
@@ -18,6 +20,8 @@ public class GameManager implements IConstants {
     private ObstacleAnalyzer obstacleAnalyzer;
 
     private boolean activeGame;
+    private ArrayList<Player> players;
+    //private ArrayList<> TODO arraylist movimientos
 
     public GameManager(){
         graph = new Graph<>();
@@ -33,11 +37,23 @@ public class GameManager implements IConstants {
         this();
         serverManager = pManager;
     }
+    protected void addPlayer(ArrayList<Team> pTeams, int[] pFlag){
+        //TODO por cada movimiento se le setea a cada team
+    }
+    protected void isReady(){
+        if(activeGame){
+            run();
+        }
+        else{
+            activeGame = true;
+        }
+    }
 
-    protected void run(){
+    private void run(){
         //Aqui se corre el juego cuando los dos estan ready
+        while(activeGame){
 
-
+        }
     }
     private void checkIfGraphSolvable(){
         if(pathAnalyzer.analyzeGraph(graph,getPrimaryConnections())){
