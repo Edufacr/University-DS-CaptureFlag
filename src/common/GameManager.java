@@ -164,6 +164,22 @@ public class GameManager implements IConstants {
     private Runnable getFightRunnable(Team pTeam1, Team pTeam2) {
     	Runnable fight = new Runnable() {
     		public void run() {
+    		    while(!battleVector.isEmpty()){
+                    for (Team team:battleVector
+                         ) {
+                        try {
+                            Thread.sleep(team.getAttacker().getAttackTime());
+                        }
+                        catch (Exception e){
+                            
+                        }
+                        team.dealDamage(team.getCurrentObjective());
+                        
+                        serverManager.sendMessage(UPDATE_HP, players);
+
+
+                    }
+                }
     			System.out.println(pTeam1.toString() + " is fighting against " + pTeam2.toString());
     			// fight.sleep(attacker_sleep_time);
     			// pTeam1 atack pTeam2

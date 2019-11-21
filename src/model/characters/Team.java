@@ -67,10 +67,11 @@ public class Team {
     }
 
     public void dealDamage(Team pOpponentTeam){
-        for (Character member:members
-             ) {
-            pOpponentTeam.receiveDamage(member.getAttackPower());
-        }
+        pOpponentTeam.receiveDamage(members.get(0).getAttackPower());
+    }
+
+    public Character getAttacker(){
+        return members.get(0);
     }
 
     public boolean isEmpty(){
