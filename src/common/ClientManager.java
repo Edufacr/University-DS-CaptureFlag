@@ -6,10 +6,16 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class ClientManager extends Observable implements Observer {
-    SocketClient client;
+    private final String ip = "127.0.0.1";
+    private SocketClient client;
 
     public ClientManager(SocketClient pClient) {
         client = pClient;
+    }
+
+    public ClientManager(Observer pObserver){
+        client = new SocketClient(ip);
+        addObserver(pObserver);
     }
 
     public void sendMessage(int num) {
@@ -18,6 +24,9 @@ public class ClientManager extends Observable implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
+        //Aqui llega el notify del SocketClient(Server)
+        //Para comunicarse con la gui usar notifyObservers
+
         //Object = Message que tiene un json adentro
         //
         /*

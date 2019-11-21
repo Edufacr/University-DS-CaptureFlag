@@ -9,22 +9,32 @@ import java.util.Observer;
 
 public class ServerManager implements Observer {
     private Server server;
-    private ArrayList<ClientManager> clients;
-    public ServerManager(){
+    private ArrayList<SocketClient> clients;
+    private GameManager gameManager;
+    public ServerManager(GameManager pGameManager){
         server = new Server(this);
-        clients = new ArrayList<ClientManager>();
+        clients = new ArrayList<SocketClient>();
+        gameManager = pGameManager;
     }
-    public void sendMessage(int num){
-        for (ClientManager client:
-             clients) {
-            client.sendMessage(num);
+    public void sendMessage(int pInt){
+        for (SocketClient client:clients
+             ) {
+            //Aqui se envía el mensaje para cada client
+            //client.sendMsg();
         }
     }
     @Override
     public void update(Observable observable, Object o) {
+        //Aqui llegan notify de los SocketsClients
         SocketClient client = (SocketClient)observable;
+        if(!clients.contains(client)){
+            clients.add(client);
+        }
+
+
+       /*SocketClient client = (SocketClient)observable;
         Message message = (Message)o;
         clients.add(new ClientManager(client));
-        System.out.println(message.getJSonString());
+        System.out.println(message.getJSonString());*/
     }
 }

@@ -1,5 +1,6 @@
 package common;
 
+import client.Server;
 import model.Square;
 import model.analyzer.ObstacleAnalyzer;
 import model.analyzer.PathAnalyzer;
@@ -16,13 +17,17 @@ public class GameManager implements IConstants {
     private PathAnalyzer<Square> pathAnalyzer;
     private ObstacleAnalyzer obstacleAnalyzer;
 
-    public GameManager(){
+    private GameManager(){
         graph = new Graph<>();
         pathAnalyzer = new PathAnalyzer<>();
         obstacleAnalyzer = new ObstacleAnalyzer();
         createGraph();
         deleteObstaclesEdges();
         checkIfGraphSolvable();
+    }
+    public GameManager(ServerManager pManager){
+        this();
+        serverManager = pManager;
     }
     private void checkIfGraphSolvable(){
         //TODO Hay que ver como se maneja o por lo menos poner en IConstants las cosas
