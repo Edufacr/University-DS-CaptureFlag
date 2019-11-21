@@ -64,19 +64,7 @@ public class GameFrame extends JPanel implements IConstants{
 	    super.add(panel);
 	}
 	
-//	private void paintRectangle(int pCoordinateX1, int pCoordinateY1, int pCoordinateX2, int pCoordinateY2) {
-//		
-//		int width = (pCoordinateX2 - pCoordinateX1) / CELL_WIDTH;
-//		width += 2;
-//		int yCoordinate = pCoordinateY1 - CELL_HEIGHT;
-//		
-//		do {
-//			int xCoordinate = pCoordinateX1;
-//			yCoordinate += CELL_HEIGHT;
-//			for (int lineCount = 0; lineCount < width; lineCount++) {
-//				this.findComponentAt(xCoordinate, yCoordinate).setBackground(Color.red);
-//				xCoordinate += CELL_WIDTH;
-//			}
-//		} while (yCoordinate < pCoordinateY2);
-//	}
+	public void updateTeamPositions(ArrayList<ArrayList<String>> pNewCoordinates) {
+		
+	}
 }

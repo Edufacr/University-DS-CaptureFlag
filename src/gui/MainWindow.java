@@ -33,7 +33,11 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	private JButton loginButton;
 	private ActionListener login;
 	private int currentFlagY;
-	private int[] flagLocation;
+	private ArrayList<Integer> flagLocation;
+	private ArrayList<Integer> team1Objective;
+	private ArrayList<Integer> team2Objective;
+	private ArrayList<Integer> team3Objective;
+	private int objectiveSelectionIndex;
 	private boolean ready;
 	
 	private MouseAdapter gamePanelListener;
@@ -46,6 +50,24 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		super.setLayout(null);
 		super.setResizable(false);
+		
+		this.flagLocation = new ArrayList<Integer>();
+		this.flagLocation.add(FLAG_X_COORDINATE);
+		this.flagLocation.add(NORTH_FLAG_Y_COORDINATE);
+		
+		this.team1Objective = new ArrayList<Integer>();
+		this.team2Objective = new ArrayList<Integer>();
+		this.team3Objective = new ArrayList<Integer>();
+		
+		this.team1Objective.add(OBJECTIVE_X_COORDINATE);
+		this.team2Objective.add(OBJECTIVE_X_COORDINATE);
+		this.team3Objective.add(OBJECTIVE_X_COORDINATE);
+		
+		this.team1Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		this.team2Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		this.team3Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		
+		this.objectiveSelectionIndex = 0;
 		
 		this.createListeners();
 		
@@ -77,21 +99,14 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		if (ready) {
         			return;
         		}
-        		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
-        		chars.add(new Archer());
-        		chars.add(new Archer());
-        		chars.add(new Archer());
-        		chars.add(new Puncher());
-        		chars.add(new Puncher());
-        		chars.add(new Puncher());
-        		chars.add(new Marine());
-        		chars.add(new Marine());
-        		chars.add(new Marine());
-        		player1Info.displayCharacters(chars);
-        		validate();
-        		repaint();
-        		System.out.println(flagLocation);
+
         		ready = true;
+        		ArrayList<ArrayList<Integer>> coordinates = new ArrayList<ArrayList<Integer>>();
+        		coordinates.add(flagLocation);
+        		coordinates.add(team1Objective);
+        		coordinates.add(team2Objective);
+        		coordinates.add(team3Objective);
+        		clientManager.setPlayerTactics(coordinates, player1Info.getTeamCompositions());
 			};
         };
         
@@ -112,13 +127,13 @@ public class MainWindow extends JFrame implements IConstants, Observer {
                 if ((xCoordinate >= FLAG_MIN_X) && (xCoordinate <= FLAG_MAX_X)) {
                 	gameFrame.getComponentAt(FLAG_X, currentFlagY).setBackground(getBackground());
                 	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, NORTH_FLAG_Y_COORDINATE};
+                		flagLocation.set(1, NORTH_FLAG_Y_COORDINATE);
                 		currentFlagY = NORTH_FLAG_Y;
                 	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, CENTER_FLAG_Y_COORDINATE};;
+                		flagLocation.set(1, CENTER_FLAG_Y_COORDINATE);
                 		currentFlagY = CENTER_FLAG_Y;
                 	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, SOUTH_FLAG_Y_COORDINATE};;
+                		flagLocation.set(1, CENTER_FLAG_Y_COORDINATE);
                 		currentFlagY = SOUTH_FLAG_Y;
                 	}
                 	
@@ -127,12 +142,14 @@ public class MainWindow extends JFrame implements IConstants, Observer {
                 	
                 } else if((xCoordinate >= OBJECTIVE_MIN_X) && (xCoordinate <= OBJECTIVE_MAX_X)) {
                 	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(NORTH_OBJECTIVE_Y_COORDINATE);
                 	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(CENTER_OBJECTIVE_Y_COORDINATE);
                 	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(SOUTH_OBJECTIVE_Y_COORDINATE);
                 	}
+                	
+                	objectiveSelectionIndex++;
                 }
             }
         };
@@ -142,6 +159,23 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	private void initGameArea() {
 		this.loginPanel.getEmail();
 		this.loginPanel.getPassword();
+		
+		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
+		chars.add(new Marine());
+		chars.add(new Marine());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Archer());
+		chars.add(new Archer());
+		chars.add(new Archer());
+		player1Info.displayCharacters(chars);
+		validate();
+		repaint();
+		
 		super.remove(this.loginButton);
 		super.remove(this.loginPanel);
 		super.add(this.player1Info);
@@ -152,14 +186,36 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.repaint();
 	}
 	
+	private void updateObjective(int pLocation) {
+		switch (this.objectiveSelectionIndex) {
+		case 0:
+			this.team1Objective.set(1, pLocation);
+			break;
+		case 1:
+			this.team2Objective.set(1, pLocation);
+			break;
+		case 2:
+			this.team3Objective.set(1, pLocation);
+			break;
+		default:
+			return;
+		}
+	}
+	
+	@Override
+	public void update(Observable observable, Object pObject) {
+		ArrayList<ArrayList<String>> message = (ArrayList<ArrayList<String>>) pObject;
+		
+		if (message.get(0).get(0) == UPDATE_POSITION_KEY.toString()) {
+			this.gameFrame.updateTeamPositions(message);
+		} else if (message.get(0).get(0) == UPDATE_HP_KEY.toString()) {
+			this.player1Info.updateCharacters(message);
+		}
+	}
+	
 	public static void main(String[] args) {
 		ObstacleAnalyzer o = new ObstacleAnalyzer();
 		System.out.println(o.getObstacleList());
 		new MainWindow();
-	}
-
-	@Override
-	public void update(Observable observable, Object o) {
-
 	}
 }

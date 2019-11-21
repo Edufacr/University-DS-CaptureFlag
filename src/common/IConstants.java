@@ -43,11 +43,11 @@ public interface IConstants {
 	public static final int NORTH_FLAG_Y_COORDINATE = 2;
 	public static final int CENTER_FLAG_Y_COORDINATE = 11;
 	public static final int SOUTH_FLAG_Y_COORDINATE = 21;
-	//TODO Cambiar
-	public static final int OBJECTIVE_X = 0;
-	public static final int NORTH_OBJECTIVE_Y = 0;
-	public static final int CENTER_OBJECTIVE_Y = 0;
-	public static final int SOUTH_OBJECTIVE_Y = 0;
+	
+	public static final int OBJECTIVE_X = 970;
+	public static final int NORTH_OBJECTIVE_Y = 90;
+	public static final int CENTER_OBJECTIVE_Y = 360;
+	public static final int SOUTH_OBJECTIVE_Y = 690;
 	
 	public static final int OBJECTIVE_X_COORDINATE = 30;
 	public static final int NORTH_OBJECTIVE_Y_COORDINATE = 2;
@@ -140,8 +140,19 @@ public interface IConstants {
 	public static final int UPDATE_HP = 1;
 	public static final int UPDATE_FLAG_POSITION = 2;
 	public static final int UPDATE_TEAM = 3;
+	public static final int SET_COORDINATES = 4;
+	public static final int SET_COMPOSITION = 5;
 
 	public static final String MAP_NOT_SOLVABLE_ERROR_MESSAGE = "ERROR: MAP NOT SOLVABLE";
+	
+	public static final String UPDATE_POSITION_KEY = "positions";
+	public static final String UPDATE_HP_KEY = "hp";
+	public static final String TACTIC_COORDINATES = "initial_coordinates";
+	public static final String TEAM_COMPOSITION = "team_composition";
+
+	public static final String TEAM_1 = "Team 1";
+	public static final String TEAM_2 = "Team 2";
+	public static final String TEAM_3 = "Team 3";
 	
 	public static final int THREAD_POOL_SIZE = 5;
 
