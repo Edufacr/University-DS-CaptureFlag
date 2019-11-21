@@ -63,6 +63,7 @@ public class GameManager implements IConstants {
     protected void isReady(){
         if(activeGame){
             //this.threadPool.execute(this.moveTeams);
+            run();
         }
         else{
             activeGame = true;
@@ -80,6 +81,7 @@ public class GameManager implements IConstants {
                      ) {
                     moveTeam(team);
                     checkWin(team.getActualSquareNum());
+                    checkBattle(team.getActualSquareNum());
                 }
             }
         	// threadPool.execute(this.moveTeams);
@@ -236,6 +238,26 @@ public class GameManager implements IConstants {
     }
     private GraphNode<Square> getBelowNode(int pNodeNum){
         return  graph.getNode(pNodeNum+GRID_WIDTH);
+    }
+
+    public static void main(String[] args) {
+        GameManager manager = new GameManager();
+        int[] flag1 = new int[2];
+        flag1[0] = OBJECTIVE_X_COORDINATE;
+        flag1[1] = NORTH_OBJECTIVE_Y_COORDINATE;
+        ArrayList<Team> char1 = new ArrayList<>();
+        manager.addPlayer(char1,flag1);
+
+        int[] flag2 = new int[2];
+        flag2[0] = OBJECTIVE_X_COORDINATE;
+        flag2[1] = NORTH_OBJECTIVE_Y_COORDINATE;
+        ArrayList<Team> char2 = new ArrayList<>();
+        manager.addPlayer(char2,flag2);
+
+        manager.isReady();
+        manager.isReady();
+
+
     }
 
 }
