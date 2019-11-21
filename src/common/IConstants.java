@@ -19,6 +19,40 @@ public interface IConstants {
 	public static final int READY_BUTTON_X = 690;
 	public static final int READY_BUTTON_Y = 825;
 
+	public static final int FLAG_MAX_X = 200;
+	public static final int FLAG_MIN_X = 0;
+	public static final int OBJECTIVE_MAX_X = 1024;
+	public static final int OBJECTIVE_MIN_X = 800;
+	public static final int NORTH_SELECTION_MAX_Y = 260;
+	public static final int NORTH_SELECTION_MIN_Y = 0;
+	public static final int CENTER_SELECTION_MAX_Y = 521;
+	public static final int CENTER_SELECTION_MIN_Y = 261;
+	public static final int SOUTH_SELECTION_MAX_Y = 800;
+	public static final int SOUTH_SELECTION_MIN_Y = 521;
+	
+	public static final int NORTH = 0;
+	public static final int CENTER = 1;
+	public static final int SOUTH = 2;
+	
+	public static final int FLAG_X = 50;
+	public static final int NORTH_FLAG_Y = 90;
+	public static final int CENTER_FLAG_Y = 360;
+	public static final int SOUTH_FLAG_Y = 690;
+	
+	public static final int FLAG_X_COORDINATE = 1;
+	public static final int NORTH_FLAG_Y_COORDINATE = 2;
+	public static final int CENTER_FLAG_Y_COORDINATE = 11;
+	public static final int SOUTH_FLAG_Y_COORDINATE = 21;
+	
+	public static final int OBJECTIVE_X = 970;
+	public static final int NORTH_OBJECTIVE_Y = 90;
+	public static final int CENTER_OBJECTIVE_Y = 360;
+	public static final int SOUTH_OBJECTIVE_Y = 690;
+	
+	public static final int OBJECTIVE_X_COORDINATE = 30;
+	public static final int NORTH_OBJECTIVE_Y_COORDINATE = 2;
+	public static final int CENTER_OBJECTIVE_Y_COORDINATE = 11;
+	public static final int SOUTH_OBJECTIVE_Y_COORDINATE = 21;
 	
 	
 	public static final String LOGIN_BUTTON_TEXT = "Login";
@@ -72,8 +106,17 @@ public interface IConstants {
 	public static final String PLAYER_2 = "Player 2";
 	public static final int PLAYER_2_INFO_X = 1252;
 	public static final int PLAYER_2_INFO_Y = 15;
-	public static final int PLAYER_NAME_X = 20;
+	public static final int PLAYER_NAME_X = 70;
 	public static final int PLAYER_NAME_Y = 20;
+	
+	public static final int CHARACTER_NAME_X = 0;
+	public static final int CHARACTER_NAME_Y = 0;
+	public static final int CHARACTER_INFO_X = 30;
+	public static final int CHARACTER_INFO_Y = 60;
+	public static final int CHARACTER_INFO_Y_ADJUST = 30;
+	public static final int CHARACTER_INFO_WIDTH = 100;
+	public static final int CHARACTER_INFO_HEIGHT = 30;
+	
 	
 	public static final String JSON_PATH = "maps/mapa3.json";
 	public static final String ARRAY_KEY = "obstaculos";
@@ -90,4 +133,31 @@ public interface IConstants {
 	public static final int PUNCHER_ATTACK_POWER = 20;
 	public static final int ARCHER_ATTACK_TIME = 1500;
 	public static final int ARCHER_ATTACK_POWER = 40;
+
+	//Messages
+	//SERVER --> CLIENT ---> GUI
+	public static final int UPDATE_POSITION = 0;
+	public static final int UPDATE_HP = 1;
+	public static final int UPDATE_FLAG_POSITION = 2;
+	public static final int UPDATE_TEAM = 3;
+	public static final int SET_COORDINATES = 4;
+	public static final int SET_COMPOSITION = 5;
+
+	public static final String MAP_NOT_SOLVABLE_ERROR_MESSAGE = "ERROR: MAP NOT SOLVABLE";
+	
+	public static final String UPDATE_POSITION_KEY = "positions";
+	public static final String UPDATE_HP_KEY = "hp";
+	public static final String TACTIC_COORDINATES = "initial_coordinates";
+	public static final String TEAM_COMPOSITION = "team_composition";
+
+	public static final String TEAM_1 = "Team 1";
+	public static final String TEAM_2 = "Team 2";
+	public static final String TEAM_3 = "Team 3";
+	
+	public static final int THREAD_POOL_SIZE = 5;
+
+	public static final int PLAYER1 = 0;
+	public static final int PLAYER2 = 1;
+
+
 }

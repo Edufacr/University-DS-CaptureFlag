@@ -3,6 +3,10 @@ package model.graph;
 import java.util.ArrayList;
 
 public class GraphNode<T> {
+	public void setContents(T contents) {
+		this.contents = contents;
+	}
+
 	private T contents;
 	private boolean visited;
 	private ArrayList<GraphNode<T>> adjacentNodes;
@@ -90,6 +94,13 @@ public class GraphNode<T> {
 		if (!this.adjacentNodes.contains(pNode)) {
 			this.adjacentNodes.add(pNode);
 			this.edges.add(new Edge<T>(this, pNode, pWeight));
+		}
+	}
+
+	public void removeEdge(GraphNode<T> pNode){
+		if(adjacentNodes.contains(pNode)){
+			adjacentNodes.remove(pNode);
+			edges.remove(getEdge(pNode));
 		}
 	}
 	

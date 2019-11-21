@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -20,11 +19,11 @@ public class GameFrame extends JPanel implements IConstants{
 		super();
 		super.setBounds(GAME_PANEL_X, GAME_PANEL_Y, GAME_PANEL_WIDTH, GAME_PANEL_HEIGHT);
 		super.setLayout(null);
-		super.setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		this.cells = new JPanel[GRID_WIDTH][GRID_HEIGHT];
 		this.fillGrid();
 		this.loadObstacles();
+		super.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	private void fillGrid() {
@@ -36,9 +35,7 @@ public class GameFrame extends JPanel implements IConstants{
 				int cellX = CELL_WIDTH * currentX;
 				int cellY = CELL_HEIGHT * currentY;
 				current.setBounds(cellX, cellY, CELL_WIDTH, CELL_HEIGHT);
-				if ((currentX+currentY)%2==0) {
-					current.setBackground(Color.BLACK);
-				} else {current.setBackground(Color.gray);}
+				current.setOpaque(false);
 				super.add(current);
 			}
 		}
@@ -55,17 +52,19 @@ public class GameFrame extends JPanel implements IConstants{
 	
 	private void paintRectangle(int pCoordinateX1, int pCoordinateY1, int pCoordinateX2, int pCoordinateY2) {
 		
-		int width = (pCoordinateX2 - pCoordinateX1) / CELL_WIDTH;
-		width += 2;
-		int yCoordinate = pCoordinateY1 - CELL_HEIGHT;
+		int width = (pCoordinateX2 - pCoordinateX1);
+		width+=2;
 		
-		do {
-			int xCoordinate = pCoordinateX1;
-			yCoordinate += CELL_HEIGHT;
-			for (int lineCount = 0; lineCount < width; lineCount++) {
-				this.findComponentAt(xCoordinate, yCoordinate).setBackground(Color.red);
-				xCoordinate += CELL_WIDTH;
-			}
-		} while (yCoordinate < pCoordinateY2);
+		int height = (pCoordinateY2 - pCoordinateY1);
+		height+=2;
+		
+	    JPanel panel = new JPanel();
+	    panel.setBounds(pCoordinateX1, pCoordinateY1, width, height);
+	    panel.setBackground(Color.BLACK);
+	    super.add(panel);
+	}
+	
+	public void updateTeamPositions(ArrayList<ArrayList<String>> pNewCoordinates) {
+		
 	}
 }

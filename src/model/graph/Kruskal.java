@@ -3,7 +3,7 @@ package model.graph;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Kruskal <T>{
+public class Kruskal <T> implements IGraphPathGettable<T> {
 	private ArrayList<GraphNode<T>> path;
 	private ArrayList<GraphNode<T>> invertedPath;
 	private ArrayList<GraphNode<T>> nodes;
@@ -19,7 +19,7 @@ public class Kruskal <T>{
 		this.mst = new Graph<T>();
 		this.stack = new Stack<GraphNode<T>>();
 	}
-	
+	@Override
 	public ArrayList<GraphNode<T>> getPath(Graph<T> pGraph, T pValue1, T pValue2) {
 		// Calculates MST
 		pGraph.clearVisits();
