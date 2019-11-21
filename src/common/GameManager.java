@@ -85,9 +85,11 @@ public class GameManager implements IConstants {
                  ) {
                 for (Team team:player.getTeams()
                      ) {
-                    moveTeam(team);
-                    checkWin(team.getActualSquareNum());
-                    checkBattle(team.getActualSquareNum());
+                    if(!team.isOnBattle()) {
+                        moveTeam(team);
+                        checkWin(team.getActualSquareNum());
+                        checkBattle(team.getActualSquareNum());
+                    }
                 }
             }
         	// threadPool.execute(this.moveTeams);
@@ -143,12 +145,6 @@ public class GameManager implements IConstants {
     		public void run() {
     			while (activeGame) {
 	    			System.out.println("moving teams");
-	    			// for (Team team : teams) { team.move(); 
-	    			// chequea si alguien ganó. Si ganó activeGame = false;
-	    			// chequea adyacencia; }
-	    			// manda mensaje
-	    			// mete equipos a lista de peleas si es necesario
-	    			// threadPool.execute(this.fight);
     			}
     		}
     	};
@@ -171,15 +167,18 @@ public class GameManager implements IConstants {
                             Thread.sleep(team.getAttacker().getAttackTime());
                         }
                         catch (Exception e){
-                            
+
                         }
+                        System.out.println(team.toString() + " is fighting against " + team.getCurrentObjective().toString());
                         team.dealDamage(team.getCurrentObjective());
                         //Mandarle mensaje a la gui
+                        if(team.getCurrentObjective().isEmpty()){
+                            battleVector.remove(team.getCurrentObjective());
+                        }
 
 
                     }
                 }
-    			System.out.println(pTeam1.toString() + " is fighting against " + pTeam2.toString());
     			// fight.sleep(attacker_sleep_time);
     			// pTeam1 atack pTeam2
     			// revisa si siguen peleando
