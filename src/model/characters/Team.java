@@ -15,19 +15,22 @@ public class Team {
     private ArrayList<GraphNode<Square>> path;
     private int actualSquareNum;
     private Team currentObjective;
-
+    private boolean onBattle;
     public Team(IGraphPathGettable<Square> pPathGetter){
         members = new ArrayList<Character>();
         pathGetter = pPathGetter;
         path = null;
         actualSquareNum = 0;
         currentObjective = null;
+        onBattle = false;
     }
     public Team(ArrayList<Character> pCharacters,int pActualSquareNum){
         members = pCharacters;
         pathGetter = null;
         path = null;
         actualSquareNum =pActualSquareNum;
+        currentObjective = null;
+        onBattle = false;
     }
 
     public GraphNode<Square> getNextMove(){
@@ -87,5 +90,13 @@ public class Team {
 
     public void setCurrentObjective(Team currentObjective) {
         this.currentObjective = currentObjective;
+    }
+
+    public boolean isOnBattle() {
+        return onBattle;
+    }
+
+    public void setOnBattle(boolean onBattle) {
+        this.onBattle = onBattle;
     }
 }

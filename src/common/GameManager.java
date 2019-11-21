@@ -24,6 +24,7 @@ public class GameManager implements IConstants {
 
     private boolean activeGame;
     private Vector<Player> players;
+    private Vector<Team> battleVector;
     private ArrayList<IGraphPathGettable<Square>> pathGetterTypes;
     private Runnable moveTeams;
     private Runnable fight;
@@ -35,6 +36,7 @@ public class GameManager implements IConstants {
         activeGame = false;
         serverManager = null;
         players = new Vector<>();
+        battleVector = new Vector<>();
         threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         createMovementRunnables();
         createGraph();
@@ -101,13 +103,19 @@ public class GameManager implements IConstants {
              ) {
             if(adjacentNode.getContents() != null){
                 if(adjacentNode.getContents().getActualTeam().getPlayer() != actualNode.getContents().getActualTeam().getPlayer()){
-                    //fight
+                    sendToFight(adjacentNode.getContents().getActualTeam(),actualNode.getContents().getActualTeam());
                 }
             }
         }
     }
     private void sendToFight(Team pTeam1, Team pTeam2){
-
+        pTeam1.setCurrentObjective(pTeam2);
+        pTeam2.setCurrentObjective(pTeam1);
+        pTeam1.setOnBattle(true);
+        pTeam2.setOnBattle(true);
+        battleVector.add(pTeam1);
+        battleVector.add(pTeam2);
+        getFightRunnable(pTeam1,pTeam2).run();
     }
     private void moveTeam(Team pTeam){
         int actualNodeNum = pTeam.getActualSquareNum();
