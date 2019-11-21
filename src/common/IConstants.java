@@ -144,4 +144,9 @@ public interface IConstants {
 	public static final String MAP_NOT_SOLVABLE_ERROR_MESSAGE = "ERROR: MAP NOT SOLVABLE";
 	
 	public static final int THREAD_POOL_SIZE = 5;
+
+	public static final int PLAYER1 = 0;
+	public static final int PLAYER2 = 1;
+
+
 }
