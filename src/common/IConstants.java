@@ -153,4 +153,11 @@ public interface IConstants {
 	public static final String TEAM_1 = "Team 1";
 	public static final String TEAM_2 = "Team 2";
 	public static final String TEAM_3 = "Team 3";
+	
+	public static final int THREAD_POOL_SIZE = 5;
+
+	public static final int PLAYER1 = 0;
+	public static final int PLAYER2 = 1;
+
+
 }
