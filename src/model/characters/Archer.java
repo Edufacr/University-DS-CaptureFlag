@@ -6,4 +6,9 @@ public class Archer extends Character{
 		super.attackPower = ARCHER_ATTACK_POWER;
 		super.attackTime = ARCHER_ATTACK_TIME;
 	}
+	
+	@Override
+	public String toString() {
+		return "Archer: " + this.healthPoints;
+	}
 }
