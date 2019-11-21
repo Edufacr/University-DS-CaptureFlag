@@ -43,6 +43,8 @@ public class ServerManager implements Observer, IConstants {
         SocketClient client = (SocketClient)observable;
         if(!clients.contains(client)){
             clients.add(client);
+        }{
+
         }
 
 
