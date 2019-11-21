@@ -24,7 +24,6 @@ public class GameManager implements IConstants {
 
     private boolean activeGame;
     private Vector<Player> players;
-    private ArrayList<Player> players;
     private ArrayList<IGraphPathGettable<Square>> pathGetterTypes;
     private Runnable moveTeams;
     private Runnable fight;
@@ -35,7 +34,7 @@ public class GameManager implements IConstants {
         obstacleAnalyzer = new ObstacleAnalyzer();
         activeGame = false;
         serverManager = null;
-        players = new ArrayList<>();
+        players = new Vector<>();
         threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         createMovementRunnables();
         createGraph();
