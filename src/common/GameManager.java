@@ -17,7 +17,7 @@ public class GameManager implements IConstants {
     private PathAnalyzer<Square> pathAnalyzer;
     private ObstacleAnalyzer obstacleAnalyzer;
 
-    private GameManager(){
+    public GameManager(){
         graph = new Graph<>();
         pathAnalyzer = new PathAnalyzer<>();
         obstacleAnalyzer = new ObstacleAnalyzer();
@@ -29,18 +29,25 @@ public class GameManager implements IConstants {
         this();
         serverManager = pManager;
     }
+
+    protected void run(){
+        //Aqui se corre el juego cuando los dos estan ready
+
+    }
     private void checkIfGraphSolvable(){
-        //TODO Hay que ver como se maneja o por lo menos poner en IConstants las cosas
         if(pathAnalyzer.analyzeGraph(graph,getPrimaryConnections())){
-            System.out.println("Graph is solvable");
+           serverManager = new ServerManager(this);
         }
         else {
-            System.out.println("ERROR: Graph is solvable");
+            System.out.println(MAP_NOT_SOLVABLE_ERROR_MESSAGE);
         }
     }
     private ArrayList<Square> getPrimaryConnections(){
-        //TODO Hay que ver donde se deciden donde se ponen las banderas
-        return null;
+        ArrayList<Square> retList = new ArrayList<>(3);
+        retList.add(graph.getNode(OBJECTIVE_X + (NORTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        retList.add(graph.getNode(OBJECTIVE_X + (CENTER_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        retList.add(graph.getNode(OBJECTIVE_X + (SOUTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        return retList;
     }
 
     private void deleteObstaclesEdges(){

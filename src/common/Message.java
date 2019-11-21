@@ -1,5 +1,8 @@
 package common;
 
+import java.util.ArrayList;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class Message {
@@ -69,6 +72,21 @@ public class Message {
             ex.printStackTrace();
         }
     }
+    
+    public void addField(String pKey, ArrayList<ArrayList<String>> pValue) {
+    	JSONArray array = new JSONArray();
+    	for (int arrayIndex = 0; arrayIndex < pValue.size(); arrayIndex++) 
+    	{
+    		for (String string : pValue.get(arrayIndex))
+    	        array.put(string);
+    	}
+    	try 
+    	{
+    	    json.put("result", array);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
 
     public String getValue(String pKey) {
         String result = "";
@@ -120,6 +138,60 @@ public class Message {
             ex.printStackTrace();
         }
         return result;
+    }
+    
+    public ArrayList<ArrayList<String>> getStringArrayValue(String pKey) {
+    	ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+    
+			try
+	        {
+				JSONArray jsonArray = json.getJSONArray(pKey);
+		        
+		        ArrayList<String> temporaryArray = new ArrayList<String>();
+		        JSONArray temporaryJsonArray;
+				for (int arrayIterator = 0; arrayIterator < jsonArray.length(); arrayIterator++) 
+				{
+					temporaryJsonArray = jsonArray.getJSONArray(arrayIterator);
+					for (int insideArrayIterator = 0; arrayIterator < temporaryJsonArray.length(); insideArrayIterator++) 
+					{
+						temporaryArray.add(temporaryJsonArray.getString(insideArrayIterator));
+					}
+					result.add(temporaryArray);
+				}
+	        }
+	        catch (Exception ex)
+	        {
+	            ex.printStackTrace();
+	        }
+    	
+    	return result;
+    }
+    
+    public ArrayList<ArrayList<Integer>> getIntegerArrayValue(String pKey) {
+    	ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+    
+			try
+	        {
+				JSONArray jsonArray = json.getJSONArray(pKey);
+		        
+		        ArrayList<Integer> temporaryArray = new ArrayList<Integer>();
+		        JSONArray temporaryJsonArray;
+				for (int arrayIterator = 0; arrayIterator < jsonArray.length(); arrayIterator++) 
+				{
+					temporaryJsonArray = jsonArray.getJSONArray(arrayIterator);
+					for (int insideArrayIterator = 0; arrayIterator < temporaryJsonArray.length(); insideArrayIterator++) 
+					{
+						temporaryArray.add(Integer.parseInt(temporaryJsonArray.getString(insideArrayIterator)));
+					}
+					result.add(temporaryArray);
+				}
+	        }
+	        catch (Exception ex)
+	        {
+	            ex.printStackTrace();
+	        }
+    	
+    	return result;
     }
 
     public String getJSonString() {
