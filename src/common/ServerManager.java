@@ -38,19 +38,22 @@ public class ServerManager implements Observer, IConstants {
        	}
     }
     @Override
-    public void update(Observable observable, Object o) {
+    public void update(Observable observable, Object pMessage) {
         //Aqui llegan notify de los SocketsClients
         SocketClient client = (SocketClient)observable;
         if(!clients.contains(client)){
             clients.add(client);
-        }{
-
         }
-
-
-       /*SocketClient client = (SocketClient)observable;
-        Message message = (Message)o;
-        clients.add(new ClientManager(client));
-        System.out.println(message.getJSonString());*/
+        
+        Message message = (Message) pMessage;
+        
+        if (message.getType() == SET_COORDINATES) {
+        	ArrayList<ArrayList<Integer>> arr = message.getIntegerArrayValue(TACTIC_COORDINATES);
+        	// pasar a game manager
+        } else if (message.getType() == SET_COMPOSITION) {
+        	ArrayList<ArrayList<String>> arr = message.getStringArrayValue(TEAM_COMPOSITION);
+        	// pasar a game manager
+        }
+        
     }
 }

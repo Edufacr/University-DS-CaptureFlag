@@ -25,8 +25,14 @@ public class ClientManager extends Observable implements Observer, IConstants{
     
     public void setPlayerTactics(ArrayList<ArrayList<Integer>> pCoordinates, ArrayList<String> pComposition) {
     	Message coordinates = new Message(SET_COORDINATES);
-    	
+    	coordinates.addField2(TACTIC_COORDINATES, pCoordinates);
     	sendMessage(coordinates);
+    	
+    	Message composition = new Message(SET_COMPOSITION);
+    	ArrayList<ArrayList<String>> arr = new ArrayList<ArrayList<String>>();
+    	arr.add(pComposition);
+    	composition.addField(TEAM_COMPOSITION, arr);
+    	sendMessage(composition);
     }
 
     @Override

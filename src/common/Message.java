@@ -87,6 +87,21 @@ public class Message {
     		e.printStackTrace();
     	}
     }
+    
+    public void addField2(String pKey, ArrayList<ArrayList<Integer>> pValue) {
+    	JSONArray array = new JSONArray();
+    	for (int arrayIndex = 0; arrayIndex < pValue.size(); arrayIndex++) 
+    	{
+    		for (Integer inte : pValue.get(arrayIndex))
+    	        array.put(inte);
+    	}
+    	try 
+    	{
+    	    json.put("result", array);
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
 
     public String getValue(String pKey) {
         String result = "";
