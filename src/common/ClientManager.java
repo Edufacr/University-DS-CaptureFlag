@@ -19,12 +19,13 @@ public class ClientManager extends Observable implements Observer, IConstants{
         addObserver(pObserver);
     }
 
-    public void sendMessage(int num) {
-        client.sendMsg(new Message(num));
+    public void sendMessage(Message pMessage) {
+        client.sendMsg(pMessage);
     }
     
-    public void setPlayerTactics() {
-    	System.out.println("a");
+    public void setPlayerTactics(ArrayList<ArrayList<Integer>> pCoordinates) {
+    	Message coordinates = new Message(SET_COORDINATES);
+    	sendMessage(coordinates);
     }
 
     @Override

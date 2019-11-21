@@ -33,7 +33,7 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	private JButton loginButton;
 	private ActionListener login;
 	private int currentFlagY;
-	private int[] flagLocation;
+	private ArrayList<Integer> flagLocation;
 	private boolean ready;
 	
 	private MouseAdapter gamePanelListener;
@@ -47,6 +47,9 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.setLayout(null);
 		super.setResizable(false);
 		
+		this.flagLocation = new ArrayList<Integer>();
+		this.flagLocation.add(FLAG_X_COORDINATE);
+		this.flagLocation.add(NORTH_FLAG_Y_COORDINATE);
 		this.createListeners();
 		
 		// Initializes game panels
@@ -79,7 +82,9 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		}
 
         		ready = true;
-        		clientManager.setPlayerTactics();
+        		ArrayList<ArrayList<Integer>> coordinates = new ArrayList<ArrayList<Integer>>();
+        		coordinates.add(flagLocation);
+        		clientManager.setPlayerTactics(coordinates);
 			};
         };
         
@@ -100,13 +105,13 @@ public class MainWindow extends JFrame implements IConstants, Observer {
                 if ((xCoordinate >= FLAG_MIN_X) && (xCoordinate <= FLAG_MAX_X)) {
                 	gameFrame.getComponentAt(FLAG_X, currentFlagY).setBackground(getBackground());
                 	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, NORTH_FLAG_Y_COORDINATE};
+                		flagLocation.set(1, NORTH_FLAG_Y_COORDINATE);
                 		currentFlagY = NORTH_FLAG_Y;
                 	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, CENTER_FLAG_Y_COORDINATE};;
+                		flagLocation.set(1, CENTER_FLAG_Y_COORDINATE);
                 		currentFlagY = CENTER_FLAG_Y;
                 	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
-                		flagLocation = new int[] {FLAG_X_COORDINATE, SOUTH_FLAG_Y_COORDINATE};;
+                		flagLocation.set(1, CENTER_FLAG_Y_COORDINATE);
                 		currentFlagY = SOUTH_FLAG_Y;
                 	}
                 	
