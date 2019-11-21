@@ -22,6 +22,7 @@ public class InfoPanel extends JPanel implements IConstants {
 	private int colorIndex;
 	private MouseAdapter teamSelection;
 	private ArrayList<JLabel> characterNames;
+	private ArrayList<JPanel> characters;
 	
 	public InfoPanel(String pPlayerName, int pPositionX, int pPositionY) {
 		super();
@@ -44,10 +45,12 @@ public class InfoPanel extends JPanel implements IConstants {
 		this.initListeners();
 		int yCoordinate = CHARACTER_INFO_Y;
 		this.characterNames = new ArrayList<JLabel>();
+		this.characters = new ArrayList<JPanel>();
 		for (Character character : pCharacters) {
 			JPanel characterPanel = new JPanel();
 			JLabel characterName = new JLabel(character.toString());
 			this.characterNames.add(characterName);
+			this.characters.add(characterPanel);
 			characterName.setLocation(CHARACTER_NAME_X, CHARACTER_NAME_Y);
 			characterPanel.add(characterName);
 			characterPanel.setBounds(CHARACTER_INFO_X, yCoordinate, CHARACTER_INFO_WIDTH, CHARACTER_INFO_HEIGHT);
@@ -65,6 +68,21 @@ public class InfoPanel extends JPanel implements IConstants {
 			this.characterNames.get(characterNamesIndex).setText(updatedInfo);
 			characterNamesIndex++;
 		}
+	}
+	
+	public ArrayList<String> getTeamCompositions() {
+		ArrayList<String> composition = new ArrayList<String>();
+		for (JPanel character : this.characters) {
+			if (character.getBackground() == Color.RED) {
+				composition.add(TEAM_1);
+			} else if (character.getBackground() == Color.CYAN) {
+				composition.add(TEAM_2);
+			} else {
+				composition.add(TEAM_3);
+			}
+		}
+		
+		return composition;
 	}
 	
 	private void initListeners() {

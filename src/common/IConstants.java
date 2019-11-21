@@ -146,5 +146,8 @@ public interface IConstants {
 	
 	public static final String UPDATE_POSITION_KEY = "positions";
 	public static final String UPDATE_HP_KEY = "hp";
-	
+
+	public static final String TEAM_1 = "Team 1";
+	public static final String TEAM_2 = "Team 2";
+	public static final String TEAM_3 = "Team 3";
 }

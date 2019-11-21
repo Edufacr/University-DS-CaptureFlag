@@ -23,8 +23,9 @@ public class ClientManager extends Observable implements Observer, IConstants{
         client.sendMsg(pMessage);
     }
     
-    public void setPlayerTactics(ArrayList<ArrayList<Integer>> pCoordinates) {
+    public void setPlayerTactics(ArrayList<ArrayList<Integer>> pCoordinates, ArrayList<String> pComposition) {
     	Message coordinates = new Message(SET_COORDINATES);
+    	
     	sendMessage(coordinates);
     }
 
