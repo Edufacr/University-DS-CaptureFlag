@@ -9,16 +9,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Team {
+    private int player;
     private IGraphPathGettable<Square> pathGetter;
     private ArrayList<Character> members;
     private ArrayList<GraphNode<Square>> path;
     private int actualSquareNum;
+    private Team currentObjective;
 
     public Team(IGraphPathGettable<Square> pPathGetter){
         members = new ArrayList<Character>();
         pathGetter = pPathGetter;
         path = null;
-        actualSquareNum =0;
+        actualSquareNum = 0;
+        currentObjective = null;
     }
     public Team(ArrayList<Character> pCharacters,int pActualSquareNum){
         members = pCharacters;
@@ -26,6 +29,7 @@ public class Team {
         path = null;
         actualSquareNum =pActualSquareNum;
     }
+
     public GraphNode<Square> getNextMove(){
         try{
             GraphNode<Square> next = path.remove(0);
@@ -63,5 +67,25 @@ public class Team {
 
     public void setPathGetter(IGraphPathGettable<Square> pathGetter) {
         this.pathGetter = pathGetter;
+    }
+
+    public int getActualSquareNum() {
+        return actualSquareNum;
+    }
+
+    public int getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(int player) {
+        this.player = player;
+    }
+
+    public Team getCurrentObjective() {
+        return currentObjective;
+    }
+
+    public void setCurrentObjective(Team currentObjective) {
+        this.currentObjective = currentObjective;
     }
 }
