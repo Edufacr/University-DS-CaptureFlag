@@ -43,7 +43,7 @@ public interface IConstants {
 	public static final int NORTH_FLAG_Y_COORDINATE = 2;
 	public static final int CENTER_FLAG_Y_COORDINATE = 11;
 	public static final int SOUTH_FLAG_Y_COORDINATE = 21;
-	
+	//TODO Cambiar
 	public static final int OBJECTIVE_X = 0;
 	public static final int NORTH_OBJECTIVE_Y = 0;
 	public static final int CENTER_OBJECTIVE_Y = 0;

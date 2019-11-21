@@ -17,10 +17,14 @@ public class GameManager implements IConstants {
     private PathAnalyzer<Square> pathAnalyzer;
     private ObstacleAnalyzer obstacleAnalyzer;
 
+    private boolean activeGame;
+
     public GameManager(){
         graph = new Graph<>();
         pathAnalyzer = new PathAnalyzer<>();
         obstacleAnalyzer = new ObstacleAnalyzer();
+        activeGame = false;
+        serverManager = null;
         createGraph();
         deleteObstaclesEdges();
         checkIfGraphSolvable();
@@ -33,6 +37,7 @@ public class GameManager implements IConstants {
     protected void run(){
         //Aqui se corre el juego cuando los dos estan ready
 
+
     }
     private void checkIfGraphSolvable(){
         if(pathAnalyzer.analyzeGraph(graph,getPrimaryConnections())){
@@ -44,9 +49,9 @@ public class GameManager implements IConstants {
     }
     private ArrayList<Square> getPrimaryConnections(){
         ArrayList<Square> retList = new ArrayList<>(3);
-        retList.add(graph.getNode(OBJECTIVE_X + (NORTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
-        retList.add(graph.getNode(OBJECTIVE_X + (CENTER_OBJECTIVE_Y*GRID_WIDTH)).getContents());
-        retList.add(graph.getNode(OBJECTIVE_X + (SOUTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,NORTH_OBJECTIVE_Y)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,CENTER_OBJECTIVE_Y)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,SOUTH_OBJECTIVE_Y)).getContents());
         return retList;
     }
 
