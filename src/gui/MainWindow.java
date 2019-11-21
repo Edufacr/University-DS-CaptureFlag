@@ -34,6 +34,10 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	private ActionListener login;
 	private int currentFlagY;
 	private ArrayList<Integer> flagLocation;
+	private ArrayList<Integer> team1Objective;
+	private ArrayList<Integer> team2Objective;
+	private ArrayList<Integer> team3Objective;
+	private int objectiveSelectionIndex;
 	private boolean ready;
 	
 	private MouseAdapter gamePanelListener;
@@ -50,6 +54,21 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		this.flagLocation = new ArrayList<Integer>();
 		this.flagLocation.add(FLAG_X_COORDINATE);
 		this.flagLocation.add(NORTH_FLAG_Y_COORDINATE);
+		
+		this.team1Objective = new ArrayList<Integer>();
+		this.team2Objective = new ArrayList<Integer>();
+		this.team3Objective = new ArrayList<Integer>();
+		
+		this.team1Objective.add(OBJECTIVE_X_COORDINATE);
+		this.team2Objective.add(OBJECTIVE_X_COORDINATE);
+		this.team3Objective.add(OBJECTIVE_X_COORDINATE);
+		
+		this.team1Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		this.team2Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		this.team3Objective.add(NORTH_OBJECTIVE_Y_COORDINATE);
+		
+		this.objectiveSelectionIndex = 0;
+		
 		this.createListeners();
 		
 		// Initializes game panels
@@ -84,7 +103,10 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		ready = true;
         		ArrayList<ArrayList<Integer>> coordinates = new ArrayList<ArrayList<Integer>>();
         		coordinates.add(flagLocation);
-        		clientManager.setPlayerTactics(coordinates);
+        		coordinates.add(team1Objective);
+        		coordinates.add(team2Objective);
+        		coordinates.add(team3Objective);
+        		clientManager.setPlayerTactics(coordinates, player1Info.getTeamCompositions());
 			};
         };
         
@@ -120,12 +142,14 @@ public class MainWindow extends JFrame implements IConstants, Observer {
                 	
                 } else if((xCoordinate >= OBJECTIVE_MIN_X) && (xCoordinate <= OBJECTIVE_MAX_X)) {
                 	if ((yCoordinate >= NORTH_SELECTION_MIN_Y) && (yCoordinate <= NORTH_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(NORTH_OBJECTIVE_Y_COORDINATE);
                 	} else if((yCoordinate >= CENTER_SELECTION_MIN_Y) && (yCoordinate <= CENTER_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(CENTER_OBJECTIVE_Y_COORDINATE);
                 	} else if((yCoordinate >= SOUTH_SELECTION_MIN_Y) && (yCoordinate <= SOUTH_SELECTION_MAX_Y)) {
-                		
+                		updateObjective(SOUTH_OBJECTIVE_Y_COORDINATE);
                 	}
+                	
+                	objectiveSelectionIndex++;
                 }
             }
         };
@@ -160,6 +184,22 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.add(this.readyButton);
 		super.validate();
 		super.repaint();
+	}
+	
+	private void updateObjective(int pLocation) {
+		switch (this.objectiveSelectionIndex) {
+		case 0:
+			this.team1Objective.set(1, pLocation);
+			break;
+		case 1:
+			this.team2Objective.set(1, pLocation);
+			break;
+		case 2:
+			this.team3Objective.set(1, pLocation);
+			break;
+		default:
+			return;
+		}
 	}
 	
 	@Override
