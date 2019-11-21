@@ -60,7 +60,7 @@ public class GameManager implements IConstants {
     }
     protected void isReady(){
         if(activeGame){
-            this.threadPool.execute(this.moveTeams);
+            //this.threadPool.execute(this.moveTeams);
         }
         else{
             activeGame = true;
@@ -72,11 +72,53 @@ public class GameManager implements IConstants {
     	// if fightingTeams.isEmpty() { mete equipos ; threadPool.execute(this.fight); }
     	// else { mete equipos; }
         while(activeGame){
+            for (Player player:players
+                 ) {
+                for (Team team:player.getTeams()
+                     ) {
+                    moveTeam(team);
+                    checkWin(team.getActualSquareNum());
+                }
+            }
         	// threadPool.execute(this.moveTeams);
         	// threadPool.execute(this.fight);
         	
         }
     }
+    private void checkWin(int pActualSquareNum) {
+        for (Player player:players
+             ) {
+            if(player.getFlagNodeNum() == pActualSquareNum){
+                System.out.println("Ganó");
+                System.out.println(player.getId());
+                activeGame = false;
+            }
+        }
+    }
+    private void checkBattle(int pActualSquareNum){
+        GraphNode<Square> actualNode = graph.getNode(pActualSquareNum);
+        for (GraphNode<Square> adjacentNode: actualNode.getAdjacentNodes()
+             ) {
+            if(adjacentNode.getContents() != null){
+                if(adjacentNode.getContents().getActualTeam().getPlayer() != actualNode.getContents().getActualTeam().getPlayer()){
+                    //fight
+                }
+            }
+        }
+    }
+    private void sendToFight(Team pTeam1, Team pTeam2){
+
+    }
+    private void moveTeam(Team pTeam){
+        int actualNodeNum = pTeam.getActualSquareNum();
+        int nextNodeNum = pTeam.getNextMove().getContents().getId();
+        GraphNode<Square> actualnode =  graph.getNode(actualNodeNum);
+        GraphNode<Square> nextnode =  graph.getNode(nextNodeNum);
+
+        nextnode.getContents().setActualTeam((actualnode.getContents().getActualTeam()));
+        actualnode.getContents().setActualTeam(null);
+    }
+
     
     private void createMovementRunnables() {
     	this.moveTeams = new Runnable() {
