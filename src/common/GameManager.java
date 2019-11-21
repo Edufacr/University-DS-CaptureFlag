@@ -43,8 +43,11 @@ public class GameManager implements IConstants {
         }
     }
     private ArrayList<Square> getPrimaryConnections(){
-        //TODO Hay que ver donde se deciden donde se ponen las banderas
-        return null;
+        ArrayList<Square> retList = new ArrayList<>(3);
+        retList.add(graph.getNode(OBJECTIVE_X + (NORTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        retList.add(graph.getNode(OBJECTIVE_X + (CENTER_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        retList.add(graph.getNode(OBJECTIVE_X + (SOUTH_OBJECTIVE_Y*GRID_WIDTH)).getContents());
+        return retList;
     }
 
     private void deleteObstaclesEdges(){
