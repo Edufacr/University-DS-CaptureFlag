@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-public class ServerManager implements Observer {
+public class ServerManager implements Observer, IConstants {
     private Server server;
     private ArrayList<SocketClient> clients;
     private GameManager gameManager;
@@ -21,6 +21,17 @@ public class ServerManager implements Observer {
              ) {
             //Aqui se envía el mensaje para cada client
             //client.sendMsg();
+        	
+        	switch (pInt) {
+        	case UPDATE_POSITION:
+        		//client.sendMsg(pData);
+        		break;
+        	case UPDATE_HP:
+        		//client.sendMsg(pData);
+        		break;
+        	default:
+        		break;
+        	}
         }
     }
     @Override
