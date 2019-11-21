@@ -152,14 +152,14 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.repaint();
 	}
 	
+	@Override
+	public void update(Observable observable, Object pObject) {
+		ArrayList<ArrayList<String>> message = (ArrayList<ArrayList<String>>) pObject;
+	}
+	
 	public static void main(String[] args) {
 		ObstacleAnalyzer o = new ObstacleAnalyzer();
 		System.out.println(o.getObstacleList());
 		new MainWindow();
-	}
-
-	@Override
-	public void update(Observable observable, Object o) {
-
 	}
 }
