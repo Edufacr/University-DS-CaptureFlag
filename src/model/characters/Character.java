@@ -19,7 +19,7 @@ public class Character implements IConstants{
 		this.healthPoints -= pDamage;
 	}
 	
-	protected int getAttackTime() {
+	public int getAttackTime() {
 		return this.attackTime;
 	}
 	
