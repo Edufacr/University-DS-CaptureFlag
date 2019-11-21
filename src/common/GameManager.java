@@ -6,8 +6,7 @@ import model.Square;
 import model.analyzer.ObstacleAnalyzer;
 import model.analyzer.PathAnalyzer;
 import model.characters.Team;
-import model.graph.Graph;
-import model.graph.GraphNode;
+import model.graph.*;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class GameManager implements IConstants {
 
     private boolean activeGame;
     private ArrayList<Player> players;
-    //private ArrayList<> TODO arraylist movimientos
+    private ArrayList<IGraphPathGettable<Square>> pathGetterTypes;
 
     public GameManager(){
         graph = new Graph<>();
@@ -29,16 +28,27 @@ public class GameManager implements IConstants {
         obstacleAnalyzer = new ObstacleAnalyzer();
         activeGame = false;
         serverManager = null;
+        players = new ArrayList<>();
         createGraph();
         deleteObstaclesEdges();
         checkIfGraphSolvable();
+    }
+    private void generatePathGetterTypes(){
+        pathGetterTypes = new ArrayList<IGraphPathGettable<Square>>();
+        pathGetterTypes.add(new Dijkstra<Square>());
+        pathGetterTypes.add(new Kruskal<Square>());
+        pathGetterTypes.add(Warshall.getInstance());
     }
     public GameManager(ServerManager pManager){
         this();
         serverManager = pManager;
     }
     protected void addPlayer(ArrayList<Team> pTeams, int[] pFlag){
-        //TODO por cada movimiento se le setea a cada team
+        for (int teamIndex = 0; teamIndex< pTeams.size();teamIndex++){
+            pTeams.get(teamIndex).setPathGetter(pathGetterTypes.get(teamIndex));
+        }
+        Player player = new Player(pTeams,getNodeNum(pFlag[0],pFlag[1]));
+        players.add(player);
     }
     protected void isReady(){
         if(activeGame){
