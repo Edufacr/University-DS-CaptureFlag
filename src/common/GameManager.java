@@ -174,7 +174,8 @@ public class GameManager implements IConstants {
                             
                         }
                         team.dealDamage(team.getCurrentObjective());
-                        //Mandarle mensaje a la gui
+                        
+                        serverManager.sendMessage(UPDATE_HP, players);
 
 
                     }
