@@ -155,6 +155,12 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	@Override
 	public void update(Observable observable, Object pObject) {
 		ArrayList<ArrayList<String>> message = (ArrayList<ArrayList<String>>) pObject;
+		
+		if (message.get(0).get(0) == UPDATE_POSITION_KEY.toString()) {
+			// función de update positions
+		} else if (message.get(0).get(0) == UPDATE_HP_KEY.toString()) {
+			// función de update hp
+		}
 	}
 	
 	public static void main(String[] args) {

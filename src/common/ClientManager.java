@@ -28,14 +28,21 @@ public class ClientManager extends Observable implements Observer, IConstants{
 
         Message message = (Message) pObject;
        
+        ArrayList<String> id;
         switch (message.getType()) {
         case UPDATE_POSITION:
         	ArrayList<ArrayList<String>> positions = message.getStringArrayValue(UPDATE_POSITION_KEY);
+        	id = new ArrayList<String>();
+        	id.add(UPDATE_POSITION_KEY.toString());
+        	positions.add(0, id);
         	this.setChanged();
         	this.notifyObservers(positions);
         	break;
         case UPDATE_HP:
         	ArrayList<ArrayList<String>> hp = message.getStringArrayValue(UPDATE_HP_KEY);
+        	id = new ArrayList<String>();
+        	id.add(UPDATE_HP_KEY.toString());
+        	hp.add(0, id);
         	this.setChanged();
         	this.notifyObservers(hp);
         	break;
