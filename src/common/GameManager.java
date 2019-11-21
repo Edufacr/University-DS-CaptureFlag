@@ -10,6 +10,8 @@ import model.graph.Graph;
 import model.graph.GraphNode;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class GameManager implements IConstants {
@@ -18,10 +20,14 @@ public class GameManager implements IConstants {
     private Graph<Square> graph;
     private PathAnalyzer<Square> pathAnalyzer;
     private ObstacleAnalyzer obstacleAnalyzer;
+    private ExecutorService threadPool;
 
     private boolean activeGame;
     private ArrayList<Player> players;
     //private ArrayList<> TODO arraylist movimientos
+    
+    private Runnable moveP1;
+    private Runnable moveP2;
 
     public GameManager(){
         graph = new Graph<>();
@@ -29,6 +35,8 @@ public class GameManager implements IConstants {
         obstacleAnalyzer = new ObstacleAnalyzer();
         activeGame = false;
         serverManager = null;
+        threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        createMovementRunnables();
         createGraph();
         deleteObstaclesEdges();
         checkIfGraphSolvable();
@@ -55,6 +63,30 @@ public class GameManager implements IConstants {
 
         }
     }
+    
+    private void createMovementRunnables() {
+    	this.moveP1 = new Runnable() {
+    		public void run() {
+    			System.out.println("moving player1's teams");
+    		}
+    	};
+    	
+    	this.moveP2 = new Runnable() {
+    		public void run() {
+    			System.out.println("moving player2's teams");
+    		}
+    	};
+    }
+    
+    private Runnable getFightRunnable(Team pTeam1, Team pTeam2) {
+    	Runnable fight = new Runnable() {
+    		public void run() {
+    			System.out.println(pTeam1.toString() + " is fighting against " + pTeam2.toString());
+    		}
+    	};
+    	return fight;
+    }
+    
     private void checkIfGraphSolvable(){
         if(pathAnalyzer.analyzeGraph(graph,getPrimaryConnections())){
            serverManager = new ServerManager(this);
