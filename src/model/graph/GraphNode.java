@@ -3,6 +3,10 @@ package model.graph;
 import java.util.ArrayList;
 
 public class GraphNode<T> {
+	public void setContents(T contents) {
+		this.contents = contents;
+	}
+
 	private T contents;
 	private boolean visited;
 	private ArrayList<GraphNode<T>> adjacentNodes;
