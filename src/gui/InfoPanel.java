@@ -21,6 +21,7 @@ public class InfoPanel extends JPanel implements IConstants {
 	private ArrayList<Color> teamColors;
 	private int colorIndex;
 	private MouseAdapter teamSelection;
+	private ArrayList<JLabel> characterNames;
 	
 	public InfoPanel(String pPlayerName, int pPositionX, int pPositionY) {
 		super();
@@ -42,15 +43,27 @@ public class InfoPanel extends JPanel implements IConstants {
 	public void displayCharacters(ArrayList<Character> pCharacters) {
 		this.initListeners();
 		int yCoordinate = CHARACTER_INFO_Y;
+		this.characterNames = new ArrayList<JLabel>();
 		for (Character character : pCharacters) {
 			JPanel characterPanel = new JPanel();
 			JLabel characterName = new JLabel(character.toString());
+			this.characterNames.add(characterName);
 			characterName.setLocation(CHARACTER_NAME_X, CHARACTER_NAME_Y);
 			characterPanel.add(characterName);
 			characterPanel.setBounds(CHARACTER_INFO_X, yCoordinate, CHARACTER_INFO_WIDTH, CHARACTER_INFO_HEIGHT);
 			yCoordinate += CHARACTER_INFO_Y_ADJUST;
 			characterPanel.addMouseListener(teamSelection);
 			super.add(characterPanel);
+		}
+	}
+	
+	public void updateCharacters(ArrayList<ArrayList<String>> pCharacters) {
+		pCharacters.remove(0);
+		int characterNamesIndex = 0;
+		for (ArrayList<String> characterInfo : pCharacters) {
+			String updatedInfo = characterInfo.get(0) + ": " + characterInfo.get(1);
+			this.characterNames.get(characterNamesIndex).setText(updatedInfo);
+			characterNamesIndex++;
 		}
 	}
 	

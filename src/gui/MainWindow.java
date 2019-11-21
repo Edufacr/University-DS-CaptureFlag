@@ -77,22 +77,9 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		if (ready) {
         			return;
         		}
-        		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
-        		chars.add(new Archer());
-        		chars.add(new Archer());
-        		chars.add(new Archer());
-        		chars.add(new Puncher());
-        		chars.add(new Puncher());
-        		chars.add(new Puncher());
-        		chars.add(new Marine());
-        		chars.add(new Marine());
-        		chars.add(new Marine());
-        		player1Info.displayCharacters(chars);
-        		validate();
-        		repaint();
-        		System.out.println(flagLocation);
+
         		ready = true;
-        		clientManager.getPlayerTactics();
+        		clientManager.setPlayerTactics();
 			};
         };
         
@@ -143,6 +130,23 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 	private void initGameArea() {
 		this.loginPanel.getEmail();
 		this.loginPanel.getPassword();
+		
+		ArrayList<model.characters.Character> chars = new ArrayList<model.characters.Character>();
+		chars.add(new Marine());
+		chars.add(new Marine());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Puncher());
+		chars.add(new Archer());
+		chars.add(new Archer());
+		chars.add(new Archer());
+		player1Info.displayCharacters(chars);
+		validate();
+		repaint();
+		
 		super.remove(this.loginButton);
 		super.remove(this.loginPanel);
 		super.add(this.player1Info);
@@ -160,7 +164,7 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		if (message.get(0).get(0) == UPDATE_POSITION_KEY.toString()) {
 			// función de update positions
 		} else if (message.get(0).get(0) == UPDATE_HP_KEY.toString()) {
-			// función de update hp
+			this.player1Info.updateCharacters(message);
 		}
 	}
 	
