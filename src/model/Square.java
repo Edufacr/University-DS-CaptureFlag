@@ -15,4 +15,12 @@ public class Square {
     public int getId() {
         return id;
     }
+
+    public Team getActualTeam() {
+        return actualTeam;
+    }
+
+    public void setActualTeam(Team actualTeam) {
+        this.actualTeam = actualTeam;
+    }
 }
