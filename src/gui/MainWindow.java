@@ -92,6 +92,7 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		repaint();
         		System.out.println(flagLocation);
         		ready = true;
+        		clientManager.getPlayerTactics();
 			};
         };
         
@@ -152,14 +153,20 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		super.repaint();
 	}
 	
+	@Override
+	public void update(Observable observable, Object pObject) {
+		ArrayList<ArrayList<String>> message = (ArrayList<ArrayList<String>>) pObject;
+		
+		if (message.get(0).get(0) == UPDATE_POSITION_KEY.toString()) {
+			// función de update positions
+		} else if (message.get(0).get(0) == UPDATE_HP_KEY.toString()) {
+			// función de update hp
+		}
+	}
+	
 	public static void main(String[] args) {
 		ObstacleAnalyzer o = new ObstacleAnalyzer();
 		System.out.println(o.getObstacleList());
 		new MainWindow();
-	}
-
-	@Override
-	public void update(Observable observable, Object o) {
-
 	}
 }

@@ -142,4 +142,8 @@ public interface IConstants {
 	public static final int UPDATE_TEAM = 3;
 
 	public static final String MAP_NOT_SOLVABLE_ERROR_MESSAGE = "ERROR: MAP NOT SOLVABLE";
+	
+	public static final String UPDATE_POSITION_KEY = "positions";
+	public static final String UPDATE_HP_KEY = "hp";
+	
 }
