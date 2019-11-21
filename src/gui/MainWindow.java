@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -17,7 +19,7 @@ import model.characters.Archer;
 import model.characters.Marine;
 import model.characters.Puncher;
 
-public class MainWindow extends JFrame implements IConstants{
+public class MainWindow extends JFrame implements IConstants, Observer{
 
 	private GameFrame gameFrame;
 	private InfoPanel player1Info;
@@ -144,5 +146,11 @@ public class MainWindow extends JFrame implements IConstants{
 		ObstacleAnalyzer o = new ObstacleAnalyzer();
 		System.out.println(o.getObstacleList());
 		new MainWindow();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
