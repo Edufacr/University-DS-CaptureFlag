@@ -22,6 +22,10 @@ public class ClientManager extends Observable implements Observer, IConstants{
     public void sendMessage(int num) {
         client.sendMsg(new Message(num));
     }
+    
+    public void getPlayerTactics() {
+    	
+    }
 
     @Override
     public void update(Observable observable, Object pObject) {

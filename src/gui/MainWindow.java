@@ -92,6 +92,7 @@ public class MainWindow extends JFrame implements IConstants, Observer {
         		repaint();
         		System.out.println(flagLocation);
         		ready = true;
+        		clientManager.getPlayerTactics();
 			};
         };
         
