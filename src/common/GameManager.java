@@ -5,6 +5,7 @@ import model.Player;
 import model.Square;
 import model.analyzer.ObstacleAnalyzer;
 import model.analyzer.PathAnalyzer;
+import model.characters.Character;
 import model.characters.Team;
 import model.graph.*;
 
@@ -39,9 +40,10 @@ public class GameManager implements IConstants {
         battleVector = new Vector<>();
         threadPool = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
         createMovementRunnables();
+        generatePathGetterTypes();
         createGraph();
         deleteObstaclesEdges();
-        checkIfGraphSolvable();
+        //checkIfGraphSolvable();
     }
     private void generatePathGetterTypes(){
         pathGetterTypes = new ArrayList<IGraphPathGettable<Square>>();
@@ -56,6 +58,7 @@ public class GameManager implements IConstants {
     protected void addPlayer(ArrayList<Team> pTeams, int[] pFlag){
         for (int teamIndex = 0; teamIndex< pTeams.size();teamIndex++){
             pTeams.get(teamIndex).setPathGetter(pathGetterTypes.get(teamIndex));
+           // pTeams. TODO ponerle que calcule el path
         }
         Player player = new Player(pTeams,getNodeNum(pFlag[0],pFlag[1]));
         players.add(player);
@@ -246,14 +249,15 @@ public class GameManager implements IConstants {
         flag1[0] = OBJECTIVE_X_COORDINATE;
         flag1[1] = NORTH_OBJECTIVE_Y_COORDINATE;
         ArrayList<Team> char1 = new ArrayList<>();
+        char1.add(new Team(new ArrayList<Character>(),0));
         manager.addPlayer(char1,flag1);
 
         int[] flag2 = new int[2];
         flag2[0] = OBJECTIVE_X_COORDINATE;
         flag2[1] = NORTH_OBJECTIVE_Y_COORDINATE;
         ArrayList<Team> char2 = new ArrayList<>();
+        char2.add(new Team(new ArrayList<Character>(),1));
         manager.addPlayer(char2,flag2);
-
         manager.isReady();
         manager.isReady();
 

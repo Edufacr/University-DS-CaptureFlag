@@ -2,6 +2,7 @@ package model.characters;
 
 import common.GameManager;
 import model.Square;
+import model.graph.Graph;
 import model.graph.GraphNode;
 import model.graph.IGraphPathGettable;
 
@@ -44,6 +45,9 @@ public class Team {
         }
 
     }
+    /*public void calcPath(Graph<GraphNode<Square>> pGraph,Square pStartPoint,Square pEndPoint){
+        path = pathGetter.getPath(pGraph,pStartPoint,pEndPoint);
+    }*/
     public void addMember(Character pCharacter){
         members.add(pCharacter);
     }

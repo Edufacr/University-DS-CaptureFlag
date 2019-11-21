@@ -23,4 +23,9 @@ public class Square {
     public void setActualTeam(Team actualTeam) {
         this.actualTeam = actualTeam;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(id);
+    }
 }

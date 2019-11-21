@@ -10,7 +10,8 @@ public class PathAnalyzer<T> {
     private Warshall<T> warshall;
 
     public PathAnalyzer(){
-        warshall = Warshall.getInstance();
+        //warshall = Warshall.getInstance();
+        warshall = new Warshall<>();
 
     }
 
