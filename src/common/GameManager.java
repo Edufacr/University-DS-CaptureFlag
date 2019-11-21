@@ -171,6 +171,8 @@ public class GameManager implements IConstants {
                         }
                         System.out.println(team.toString() + " is fighting against " + team.getCurrentObjective().toString());
                         team.dealDamage(team.getCurrentObjective());
+                        
+                        serverManager.sendMessage(UPDATE_HP, players);
                         //Mandarle mensaje a la gui
                         if(team.getCurrentObjective().isEmpty()){
                             battleVector.remove(team.getCurrentObjective());

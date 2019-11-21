@@ -26,7 +26,7 @@ public class ServerManager implements Observer, IConstants {
        		break;
        	case UPDATE_HP:
        		data = new Message(UPDATE_HP);
-       		data.addField(UPDATE_HP_KEY, new ArrayList<ArrayList<String>>());
+       		//data.addField(UPDATE_HP_KEY, new ArrayList<ArrayList<String>>());
        		break;
        	default:
        		data = null;
