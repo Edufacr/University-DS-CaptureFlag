@@ -175,9 +175,9 @@ public class GameManager implements IConstants {
     }
     private ArrayList<Square> getPrimaryConnections(){
         ArrayList<Square> retList = new ArrayList<>(3);
-        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,NORTH_OBJECTIVE_Y_COORDINATE)).getContents());
-        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,CENTER_OBJECTIVE_Y_COORDINATE)).getContents());
-        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X,SOUTH_OBJECTIVE_Y_COORDINATE)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X_COORDINATE,NORTH_OBJECTIVE_Y_COORDINATE)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X_COORDINATE,CENTER_OBJECTIVE_Y_COORDINATE)).getContents());
+        retList.add(graph.getNode(getNodeNum(OBJECTIVE_X_COORDINATE,SOUTH_OBJECTIVE_Y_COORDINATE)).getContents());
         return retList;
     }
 
