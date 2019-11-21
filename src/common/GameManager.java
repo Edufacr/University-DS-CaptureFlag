@@ -19,7 +19,13 @@ public class GameManager implements IConstants {
         graph = new Graph<>();
         pathAnalyzer = new PathAnalyzer<>();
         obstacleAnalyzer = new ObstacleAnalyzer();
+        createGraph();
     }
+
+    private void deleteObstaclesEdges(){
+
+    }
+
 
     private void createGraph(){
         int numOfNodes = GRID_WIDTH * GRID_HEIGHT;
@@ -41,8 +47,6 @@ public class GameManager implements IConstants {
         }
     }
     private void linkGraphNode(int pNodeNum){
-        //TODO Change graph get() to ingore index = -1
-        //TODO Change graph add Edge to ignore null
         GraphNode<Square> node = graph.getNode(pNodeNum);
         for (GraphNode<Square> linkingNode: getNodesToLink(pNodeNum)
              ) {
