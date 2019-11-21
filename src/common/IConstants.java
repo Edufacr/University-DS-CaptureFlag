@@ -98,7 +98,7 @@ public interface IConstants {
 	public static final String PLAYER_2 = "Player 2";
 	public static final int PLAYER_2_INFO_X = 1252;
 	public static final int PLAYER_2_INFO_Y = 15;
-	public static final int PLAYER_NAME_X = 20;
+	public static final int PLAYER_NAME_X = 70;
 	public static final int PLAYER_NAME_Y = 20;
 	
 	public static final int CHARACTER_NAME_X = 0;
