@@ -39,12 +39,20 @@ public interface IConstants {
 	public static final int CENTER_FLAG_Y = 360;
 	public static final int SOUTH_FLAG_Y = 690;
 	
-	public static final int NORTH_OBJECTIVE_X = 0;
+	public static final int FLAG_X_COORDINATE = 1;
+	public static final int NORTH_FLAG_Y_COORDINATE = 2;
+	public static final int CENTER_FLAG_Y_COORDINATE = 11;
+	public static final int SOUTH_FLAG_Y_COORDINATE = 21;
+	
+	public static final int OBJECTIVE_X = 0;
 	public static final int NORTH_OBJECTIVE_Y = 0;
-	public static final int CENTER_OBJECTIVE_X = 0;
 	public static final int CENTER_OBJECTIVE_Y = 0;
-	public static final int SOUTH_OBJECTIVE_X = 0;
 	public static final int SOUTH_OBJECTIVE_Y = 0;
+	
+	public static final int OBJECTIVE_X_COORDINATE = 30;
+	public static final int NORTH_OBJECTIVE_Y_COORDINATE = 2;
+	public static final int CENTER_OBJECTIVE_Y_COORDINATE = 11;
+	public static final int SOUTH_OBJECTIVE_Y_COORDINATE = 21;
 	
 	
 	public static final String LOGIN_BUTTON_TEXT = "Login";
@@ -98,7 +106,7 @@ public interface IConstants {
 	public static final String PLAYER_2 = "Player 2";
 	public static final int PLAYER_2_INFO_X = 1252;
 	public static final int PLAYER_2_INFO_Y = 15;
-	public static final int PLAYER_NAME_X = 20;
+	public static final int PLAYER_NAME_X = 70;
 	public static final int PLAYER_NAME_Y = 20;
 	
 	public static final int CHARACTER_NAME_X = 0;

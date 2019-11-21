@@ -63,7 +63,6 @@ public class InfoPanel extends JPanel implements IConstants {
 		};
 	}
 	
-	
 	private Color getNextColor() {
 		Color color = this.teamColors.get(colorIndex);
 		if (colorIndex < this.teamColors.size()-1) {
