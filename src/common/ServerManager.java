@@ -29,6 +29,8 @@ public class ServerManager implements Observer {
         SocketClient client = (SocketClient)observable;
         if(!clients.contains(client)){
             clients.add(client);
+        }{
+
         }
 
 
