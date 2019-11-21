@@ -116,4 +116,11 @@ public interface IConstants {
 	public static final int PUNCHER_ATTACK_POWER = 20;
 	public static final int ARCHER_ATTACK_TIME = 1500;
 	public static final int ARCHER_ATTACK_POWER = 40;
+
+	//Messages
+	//SERVER --> CLIENT ---> GUI
+	public static final int UPDATE_POSITION = 0;
+	public static final int UPDATE_HP = 1;
+	public static final int UPDATE_FLAG_POSITION = 2;
+	public static final int UPDATE_TEAM = 3;
 }
