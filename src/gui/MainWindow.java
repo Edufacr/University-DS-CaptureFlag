@@ -207,7 +207,7 @@ public class MainWindow extends JFrame implements IConstants, Observer {
 		ArrayList<ArrayList<String>> message = (ArrayList<ArrayList<String>>) pObject;
 		
 		if (message.get(0).get(0) == UPDATE_POSITION_KEY.toString()) {
-			// función de update positions
+			this.gameFrame.updateTeamPositions(message);
 		} else if (message.get(0).get(0) == UPDATE_HP_KEY.toString()) {
 			this.player1Info.updateCharacters(message);
 		}
