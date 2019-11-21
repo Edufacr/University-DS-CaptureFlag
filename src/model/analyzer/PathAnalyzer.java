@@ -10,7 +10,8 @@ public class PathAnalyzer<T> {
     private Warshall<T> warshall;
 
     public PathAnalyzer(){
-        warshall = new Warshall<T>(); //*** Hay que cambiar Warshall a Singleton
+        warshall = Warshall.getInstance();
+
     }
 
     public boolean analyzeGraph(Graph<T> pGraph,ArrayList<T> pPrimaryConnectionsContent){

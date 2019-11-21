@@ -10,7 +10,8 @@ import java.util.ArrayList;
 
 
 public class GameManager implements IConstants {
-    private final int edgeWeight = 1;
+    private static final int DEFAULT_EDGE_WEIGHT = 1;
+    private ServerManager serverManager;
     private Graph<Square> graph;
     private PathAnalyzer<Square> pathAnalyzer;
     private ObstacleAnalyzer obstacleAnalyzer;
@@ -20,10 +21,35 @@ public class GameManager implements IConstants {
         pathAnalyzer = new PathAnalyzer<>();
         obstacleAnalyzer = new ObstacleAnalyzer();
         createGraph();
+        deleteObstaclesEdges();
+        checkIfGraphSolvable();
+    }
+    private void checkIfGraphSolvable(){
+        //TODO Hay que ver como se maneja o por lo menos poner en IConstants las cosas
+        if(pathAnalyzer.analyzeGraph(graph,getPrimaryConnections())){
+            System.out.println("Graph is solvable");
+        }
+        else {
+            System.out.println("ERROR: Graph is solvable");
+        }
+    }
+    private ArrayList<Square> getPrimaryConnections(){
+        //TODO Hay que ver donde se deciden donde se ponen las banderas
+        return null;
     }
 
     private void deleteObstaclesEdges(){
+        ArrayList<ArrayList<Integer>> obstacles = obstacleAnalyzer.getObstacleList();
+        int nodeNum;
+        for (ArrayList<Integer> coordinates:obstacles
+             ) {
+            nodeNum = getNodeNum(coordinates.get(0),coordinates.get(1));
+            graph.removeEdges(graph.getNode(nodeNum));
+        }
+    }
 
+    private int getNodeNum(int pX, int pY){
+        return (pY*GRID_WIDTH)+pX;
     }
 
 
@@ -50,7 +76,7 @@ public class GameManager implements IConstants {
         GraphNode<Square> node = graph.getNode(pNodeNum);
         for (GraphNode<Square> linkingNode: getNodesToLink(pNodeNum)
              ) {
-            graph.addEdge(node,linkingNode,edgeWeight);
+            graph.addEdge(node,linkingNode, DEFAULT_EDGE_WEIGHT);
         }
 
     }
