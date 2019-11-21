@@ -15,6 +15,7 @@ public class Team {
     private ArrayList<Character> members;
     private ArrayList<GraphNode<Square>> path;
     private int actualSquareNum;
+    private int objetiveSquareNum;
     private Team currentObjective;
     private boolean onBattle;
     public Team(IGraphPathGettable<Square> pPathGetter){
@@ -25,13 +26,14 @@ public class Team {
         currentObjective = null;
         onBattle = false;
     }
-    public Team(ArrayList<Character> pCharacters,int pActualSquareNum){
+    public Team(ArrayList<Character> pCharacters,int pActualSquareNum,int pObjetiveSquareNum){
         members = pCharacters;
         pathGetter = null;
         path = null;
         actualSquareNum =pActualSquareNum;
         currentObjective = null;
         onBattle = false;
+        objetiveSquareNum = pObjetiveSquareNum;
     }
 
     public GraphNode<Square> getNextMove(){
@@ -45,9 +47,12 @@ public class Team {
         }
 
     }
-    /*public void calcPath(Graph<GraphNode<Square>> pGraph,Square pStartPoint,Square pEndPoint){
+    public boolean isPathEmpty(){
+        return path.isEmpty();
+    }
+    public void calcPath(Graph<Square> pGraph,Square pStartPoint,Square pEndPoint){
         path = pathGetter.getPath(pGraph,pStartPoint,pEndPoint);
-    }*/
+    }
     public void addMember(Character pCharacter){
         members.add(pCharacter);
     }
@@ -102,5 +107,13 @@ public class Team {
 
     public void setOnBattle(boolean onBattle) {
         this.onBattle = onBattle;
+    }
+
+    public int getObjetiveSquareNum() {
+        return objetiveSquareNum;
+    }
+
+    public void setObjetiveSquareNum(int objetiveSquareNum) {
+        this.objetiveSquareNum = objetiveSquareNum;
     }
 }

@@ -1,5 +1,7 @@
 package model.graph;
 
+import model.Square;
+
 import java.util.ArrayList;
 
 public interface IGraphPathGettable<T> {

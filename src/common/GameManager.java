@@ -58,6 +58,9 @@ public class GameManager implements IConstants {
     protected void addPlayer(ArrayList<Team> pTeams, int[] pFlag){
         for (int teamIndex = 0; teamIndex< pTeams.size();teamIndex++){
             pTeams.get(teamIndex).setPathGetter(pathGetterTypes.get(teamIndex));
+            int actualNodeNum = pTeams.get(teamIndex).getActualSquareNum();
+            int destinationNodeNum = pTeams.get(teamIndex).getObjetiveSquareNum();
+            pTeams.get(teamIndex).calcPath(graph,graph.getNode(actualNodeNum).getContents(),graph.getNode(destinationNodeNum).getContents());
            // pTeams. TODO ponerle que calcule el path
         }
         Player player = new Player(pTeams,getNodeNum(pFlag[0],pFlag[1]));
@@ -106,7 +109,7 @@ public class GameManager implements IConstants {
         GraphNode<Square> actualNode = graph.getNode(pActualSquareNum);
         for (GraphNode<Square> adjacentNode: actualNode.getAdjacentNodes()
              ) {
-            if(adjacentNode.getContents() != null){
+            if(adjacentNode.getContents().getActualTeam() != null){
                 if(adjacentNode.getContents().getActualTeam().getPlayer() != actualNode.getContents().getActualTeam().getPlayer()){
                     sendToFight(adjacentNode.getContents().getActualTeam(),actualNode.getContents().getActualTeam());
                 }
@@ -123,13 +126,15 @@ public class GameManager implements IConstants {
         getFightRunnable(pTeam1,pTeam2).run();
     }
     private void moveTeam(Team pTeam){
-        int actualNodeNum = pTeam.getActualSquareNum();
-        int nextNodeNum = pTeam.getNextMove().getContents().getId();
-        GraphNode<Square> actualnode =  graph.getNode(actualNodeNum);
-        GraphNode<Square> nextnode =  graph.getNode(nextNodeNum);
+        if(!pTeam.isPathEmpty()){
+            int actualNodeNum = pTeam.getActualSquareNum();
+            int nextNodeNum = pTeam.getNextMove().getContents().getId();
+            GraphNode<Square> actualnode =  graph.getNode(actualNodeNum);
+            GraphNode<Square> nextnode =  graph.getNode(nextNodeNum);
 
-        nextnode.getContents().setActualTeam((actualnode.getContents().getActualTeam()));
-        actualnode.getContents().setActualTeam(null);
+            nextnode.getContents().setActualTeam((actualnode.getContents().getActualTeam()));
+            actualnode.getContents().setActualTeam(null);
+        }
     }
 
     
@@ -249,14 +254,14 @@ public class GameManager implements IConstants {
         flag1[0] = OBJECTIVE_X_COORDINATE;
         flag1[1] = NORTH_OBJECTIVE_Y_COORDINATE;
         ArrayList<Team> char1 = new ArrayList<>();
-        char1.add(new Team(new ArrayList<Character>(),0));
+        char1.add(new Team(new ArrayList<Character>(),0,10));
         manager.addPlayer(char1,flag1);
 
         int[] flag2 = new int[2];
         flag2[0] = OBJECTIVE_X_COORDINATE;
         flag2[1] = NORTH_OBJECTIVE_Y_COORDINATE;
         ArrayList<Team> char2 = new ArrayList<>();
-        char2.add(new Team(new ArrayList<Character>(),1));
+        char2.add(new Team(new ArrayList<Character>(),1,11));
         manager.addPlayer(char2,flag2);
         manager.isReady();
         manager.isReady();
