@@ -44,10 +44,10 @@ public interface IConstants {
 	public static final int CENTER_FLAG_Y_COORDINATE = 11;
 	public static final int SOUTH_FLAG_Y_COORDINATE = 21;
 	
-	public static final int OBJECTIVE_X = 0;
-	public static final int NORTH_OBJECTIVE_Y = 0;
-	public static final int CENTER_OBJECTIVE_Y = 0;
-	public static final int SOUTH_OBJECTIVE_Y = 0;
+	public static final int OBJECTIVE_X = 970;
+	public static final int NORTH_OBJECTIVE_Y = 90;
+	public static final int CENTER_OBJECTIVE_Y = 360;
+	public static final int SOUTH_OBJECTIVE_Y = 690;
 	
 	public static final int OBJECTIVE_X_COORDINATE = 30;
 	public static final int NORTH_OBJECTIVE_Y_COORDINATE = 2;
