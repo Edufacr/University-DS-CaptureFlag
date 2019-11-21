@@ -1,5 +1,7 @@
 package model.graph;
 
+import model.analyzer.PathAnalyzer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ArrayDeque;
@@ -45,21 +47,53 @@ public class Graph<T> {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
 			GraphNode<T> node1 = directory.get(pValue1);
 			GraphNode<T> node2 = directory.get(pValue2);
-			node1.addEdge(node2, pWeight);
-			node2.addEdge(node1, pWeight);
-			this.edges.add(node1.getEdge(node2));
-			this.edges.add(node2.getEdge(node1));
+			addEdge(node1,node2,pWeight);
 		}
 	}
 	
 	public void addEdge(GraphNode<T> pNode1, GraphNode<T> pNode2, int pWeight) {
-		if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
-			pNode1.addEdge(pNode2, pWeight);
-			pNode2.addEdge(pNode1, pWeight);
-			this.edges.add(pNode1.getEdge(pNode2));
-			this.edges.add(pNode2.getEdge(pNode1));
+		try{
+			if (this.directory.containsValue(pNode1) && this.directory.containsValue(pNode2)) {
+				pNode1.addEdge(pNode2, pWeight);
+				pNode2.addEdge(pNode1, pWeight);
+				this.edges.add(pNode1.getEdge(pNode2));
+				this.edges.add(pNode2.getEdge(pNode1));
+			}
+		}
+		catch (Exception ignored){
+		}
+
+	}
+
+	public void removeEdge(T pValue1, T pValue2){
+		if(directory.containsKey(pValue1) && directory.containsKey(pValue2)){
+			GraphNode<T> node1 = directory.get(pValue1);
+			GraphNode<T> node2 = directory.get(pValue2);
+			removeEdge(node1,node2);
 		}
 	}
+	public void removeEdge(GraphNode<T> pNode1, GraphNode<T> pNode2){
+        if (directory.containsValue(pNode1) && directory.containsValue(pNode2)){
+            edges.remove(pNode1.getEdge(pNode2));
+            edges.remove(pNode2.getEdge(pNode1));
+            pNode1.removeEdge(pNode2);
+            pNode2.removeEdge(pNode1);
+        }
+	}
+
+	public void removeEdges(T pValue){
+	    if(directory.containsKey(pValue)){
+	        removeEdges(directory.get(pValue));
+        }
+	}
+
+	public void removeEdges(GraphNode<T> pNode){
+	    ArrayList<GraphNode<T>> list = (ArrayList<GraphNode<T>>)pNode.getAdjacentNodes().clone();
+        for (GraphNode<T> adjacent:list
+        ) {
+            removeEdge(pNode,adjacent);
+        }
+    }
 	
 	public int getWeight(T pValue1, T pValue2) {
 		if (this.directory.containsKey(pValue1) && this.directory.containsKey(pValue2)) {
@@ -125,10 +159,7 @@ public class Graph<T> {
 	}
 	
 	public boolean contains(T pValue) {
-		if (this.directory.containsKey(pValue)) {
-			return true;
-		}
-		return false;
+		return this.directory.containsKey(pValue);
 	}
 	
 	public GraphNode<T> getNode(T pValue){
@@ -136,6 +167,15 @@ public class Graph<T> {
 			return this.directory.get(pValue);
 		}
 		return null;
+	}
+
+	public GraphNode<T>getNode(int pNodePos){
+		try{
+			return nodes.get(pNodePos);
+		}
+		catch (Exception e){
+			return null;
+		}
 	}
 	
 	public ArrayList<GraphNode<T>> getNodes(){
@@ -146,14 +186,15 @@ public class Graph<T> {
 		Collections.sort(this.edges);
 		return this.edges;
 	}
+	public boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
+		return pNode1.getAdjacentNodes().contains(pNode2);
+	}
 	
 	int getSize() {
 		return this.nodes.size();
 	}
 
-	boolean areAdjacent(GraphNode<T> pNode1, GraphNode<T> pNode2 ){
-		return pNode1.getAdjacentNodes().contains(pNode2);
-	}
+
 
 	public static void main(String[] args) {
 		Graph<String> g = new Graph<String>();
@@ -168,6 +209,7 @@ public class Graph<T> {
 		g.addNode("E");
 		g.addNode("F");
 		g.addNode("F");
+		g.addNode("Z");
 		
 		g.addEdge("A", "C", 5);
 		g.addEdge("A", "D", 7);
@@ -181,10 +223,22 @@ public class Graph<T> {
 		g.print();
 		
 		System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
+
+		g.removeEdges(g.getNode("A"));
+        g.print();
+
+        System.out.println("\nEdges:" + g.getEdges().toString() + "\n");
 		
-		System.out.println("Dijkstra path: " + d.calculateDijkstra(g, "D", "F") + "\n");
+		System.out.println("Dijkstra path: " + d.getPath(g, "D", "F") + "\n");
 		System.out.println("Kruskal path: " + k.getPath(g, "D", "F") + "\n");
-		w.calculateWarshall(g);
-		System.out.println("Warshall path: " + w.getPath("D", "F"));
+		System.out.println("Warshall path: " + w.getPath(g,"D", "F"));
+		PathAnalyzer<String> analyzer = new PathAnalyzer<>();
+		ArrayList<String> primaryCon = new ArrayList<>();
+		primaryCon.add("C");
+		primaryCon.add("B");
+		primaryCon.add("A");
+
+		System.out.println(analyzer.analyzeGraph(g,primaryCon));
+
 	}
 }

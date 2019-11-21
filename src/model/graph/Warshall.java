@@ -2,46 +2,62 @@ package model.graph;
 
 import java.util.ArrayList;
 
-public class Warshall<T> {
+public class Warshall<T> implements IGraphPathGettable<T> {
+    private static Warshall singleton;
     private Graph<T> original;
-    private Graph<T> copy;
+    private Graph<T> connectionGraph;
     public Warshall(){
-        copy = null;
+        connectionGraph = null;
         original = null;
     }
+    public static Warshall getInstance(){
+        if (singleton == null) {
+            singleton = new Warshall();
+        }
+        return singleton;
+    }
+    @Override
+    public ArrayList<GraphNode<T>> getPath(Graph<T> pGraph, T pStartContent, T pEndContent) {
+        calculateWarshall(pGraph);
+        return getPath(pStartContent, pEndContent);
+    }
+
+    public Graph<T> getConnectionGraph() {
+        return connectionGraph;
+    }
+
     public void calculateWarshall(Graph<T> pGraph){
         initValues(pGraph);
-        for (GraphNode<T> linkNode:copy.getNodes()
+        for (GraphNode<T> linkNode: connectionGraph.getNodes()
              ) {
-            for (GraphNode<T> sourceNode:copy.getNodes()
+            for (GraphNode<T> sourceNode: connectionGraph.getNodes()
             ) {
-                for (GraphNode<T> endNode:copy.getNodes()
+                for (GraphNode<T> endNode: connectionGraph.getNodes()
                 ) {
-                    if (copy.areAdjacent(sourceNode,endNode)){
+                    if (connectionGraph.areAdjacent(sourceNode,endNode)){
                         continue;
                     }
-                    if(copy.areAdjacent(sourceNode,linkNode) && copy.areAdjacent(linkNode,endNode)){
+                    if(connectionGraph.areAdjacent(sourceNode,linkNode) && connectionGraph.areAdjacent(linkNode,endNode)){
                         addConnection(sourceNode,endNode,linkNode);
                     }
                 }
             }
         }
     }
-    private void initValues(Graph<T> pGraph){
-        original = pGraph;
-        copy = duplicateGraph(pGraph);
-    }
-    
-    public ArrayList<GraphNode<T>> getPath(T startContent, T endContent){
+    private ArrayList<GraphNode<T>> getPath(T startContent, T endContent){
         ArrayList<GraphNode<T>> list = new ArrayList<GraphNode<T>>();
-        GraphNode<T> startNode = copy.getNode(startContent);
+        GraphNode<T> startNode = connectionGraph.getNode(startContent);
         for (GraphNode<T> node:startNode.getAdjacentNodes()
-             ) {
+        ) {
             if(node.getContents().equals(endContent)){
                 getOriginalNodePath(getPath(node), list);
             }
         }
         return list;
+    }
+    private void initValues(Graph<T> pGraph){
+        original = pGraph;
+        connectionGraph = duplicateGraph(pGraph);
     }
     private ArrayList<GraphNode<T>> getPath(GraphNode<T> pNode){
         ArrayList<GraphNode<T>> list = new ArrayList<GraphNode<T>>();
@@ -88,7 +104,7 @@ public class Warshall<T> {
 
     public static void main(String[] args) {
         Graph<Integer> g1 = new Graph<Integer>();
-        Warshall<Integer> w = new Warshall<Integer>();
+        Warshall<Integer> w = Warshall.getInstance();
         g1.addNode(1);
         g1.addNode(2);
         g1.addNode(3);

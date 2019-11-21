@@ -6,4 +6,9 @@ public class Puncher extends Character {
 		super.attackPower = PUNCHER_ATTACK_POWER;
 		super.attackTime = PUNCHER_ATTACK_TIME;
 	}
+	
+	@Override
+	public String toString() {
+		return "Puncher: " + this.healthPoints;
+	}
 }

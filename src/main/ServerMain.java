@@ -1,13 +1,15 @@
 package main;
 
 import client.Server;
+import common.GameManager;
 import common.ServerManager;
 
 import java.io.IOException;
 
 public class ServerMain {
     public static void main(String[] args) {
-        ServerManager manager = new ServerManager();
+        GameManager manager = new GameManager();
+        /*ServerManager manager = new ServerManager();
         int i = 0;
         try{
              i=System.in.read();
@@ -15,6 +17,6 @@ public class ServerMain {
         catch (IOException e){
 
         }
-        manager.sendMessage(i);
+        manager.sendMessage(i);*/
     }
 }
