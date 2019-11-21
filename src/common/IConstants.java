@@ -141,11 +141,14 @@ public interface IConstants {
 	public static final int UPDATE_FLAG_POSITION = 2;
 	public static final int UPDATE_TEAM = 3;
 	public static final int SET_COORDINATES = 4;
+	public static final int SET_COMPOSITION = 5;
 
 	public static final String MAP_NOT_SOLVABLE_ERROR_MESSAGE = "ERROR: MAP NOT SOLVABLE";
 	
 	public static final String UPDATE_POSITION_KEY = "positions";
 	public static final String UPDATE_HP_KEY = "hp";
+	public static final String TACTIC_COORDINATES = "initial_coordinates";
+	public static final String TEAM_COMPOSITION = "team_composition";
 
 	public static final String TEAM_1 = "Team 1";
 	public static final String TEAM_2 = "Team 2";
