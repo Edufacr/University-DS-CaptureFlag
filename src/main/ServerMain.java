@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class ServerMain {
     public static void main(String[] args) {
-        ServerManager manager = new ServerManager();
+        /*ServerManager manager = new ServerManager();
         int i = 0;
         try{
              i=System.in.read();
@@ -15,6 +15,6 @@ public class ServerMain {
         catch (IOException e){
 
         }
-        manager.sendMessage(i);
+        manager.sendMessage(i);*/
     }
 }
